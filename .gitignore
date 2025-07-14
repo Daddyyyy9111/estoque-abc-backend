@@ -1,0 +1,21 @@
+# Ignorar pastas de ambiente virtual
+venv/
+.venv/
+
+# Ignorar arquivos de cache e compilação do Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignorar arquivos de dados sensíveis ou gerados
+serviceAccountKey.json
+serviceAccountKey.json.json
+*.log
+processed_emails.json
+
+# Ignorar arquivos de IDEs (opcional, mas recomendado)
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace

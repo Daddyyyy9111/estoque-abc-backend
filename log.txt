@@ -1,0 +1,203 @@
+[2025-07-09 09:06:08] [INFO] === Iniciando o automatizador de Pedidos ABC Móveis ===
+[2025-07-09 09:06:08] [INFO] Pasta de PDFs './Pedidos_PDF' verificada/criada.
+[2025-07-09 09:06:08] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-09 09:06:08] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-09 09:06:09] [INFO] Conectando ao servidor IMAP: imap.gmail.com
+[2025-07-09 09:06:10] [INFO] Login IMAP bem-sucedido.
+[2025-07-09 09:06:11] [INFO] Emails não lidos encontrados: 2
+[2025-07-09 09:06:12] [INFO] Processando email ID 234 - Assunto: 'OS 5594 - MUNICIPIO DE SANTA CRUZ DAS PALMEIRAS/SP'
+[2025-07-09 09:06:12] [INFO] PDF salvo (contém 'PEDIDO'): PEDIDO - MUNICIPIO DE SANTA CRUZ DAS PALMEIRAS.pdf em ./Pedidos_PDF\PEDIDO - MUNICIPIO DE SANTA CRUZ DAS PALMEIRAS.pdf
+[2025-07-09 09:06:12] [INFO] PDF 'OS 5594 - PLANO DE CORTE - MUNICIPIO DE SANTA CRUZ DAS PALMEIRAS.pdf' não contém 'PEDIDO' no nome ou não é um PDF. Ignorando.
+[2025-07-09 09:06:12] [INFO] PDF 'OS 5594 - CONTROLE DE PRODUÇÃO - MUNICIPIO DE SANTA CRUZ DAS PALMEIRAS.pdf' não contém 'PEDIDO' no nome ou não é um PDF. Ignorando.
+[2025-07-09 09:06:12] [INFO] Email ID 234 marcado como lido.
+[2025-07-09 09:06:13] [INFO] Processando email ID 236 - Assunto: 'OS 5595 - MUNICIPIO DE PEDRAS GRANDES/SC'
+[2025-07-09 09:06:13] [INFO] PDF salvo (contém 'PEDIDO'): PEDIDO - MUNICIPIO DE PEDRAS GRANDES.pdf em ./Pedidos_PDF\PEDIDO - MUNICIPIO DE PEDRAS GRANDES.pdf
+[2025-07-09 09:06:13] [INFO] PDF 'OS 5595 - PLANO DE CORTE - MUNICIPIO DE PEDRAS GRANDES.pdf' não contém 'PEDIDO' no nome ou não é um PDF. Ignorando.
+[2025-07-09 09:06:13] [INFO] PDF 'OS 5595 - CONTROLE DE PRODUÇÃO - MUNICIPIO DE PEDRAS GRANDES.pdf' não contém 'PEDIDO' no nome ou não é um PDF. Ignorando.
+[2025-07-09 09:06:13] [INFO] Email ID 236 marcado como lido.
+[2025-07-09 09:06:14] [INFO] Lista de emails processados salva. Total: 2
+[2025-07-09 09:06:14] [INFO] Novos PDFs baixados neste ciclo: 2
+[2025-07-09 09:06:14] [INFO] Iniciando extração de informações dos PDFs recém-baixados...
+[2025-07-09 09:06:14] [INFO] Analisando PDF: PEDIDO - MUNICIPIO DE SANTA CRUZ DAS PALMEIRAS.pdf (1 páginas)
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Texto completo da página 1 de 'PEDIDO - MUNICIPIO DE SANTA CRUZ DAS PALMEIRAS.pdf':
+---
+ 
+SF-007             
+Ordem de Serviço 
+Elaborado:     
+16/04/2014 
+Revisado: 
+15/12/2016 
+Revisão: 
+03 
+Setor: 
+Vendas / Compras / Produção 
+Responsável Pela Elaboração: 
+Vendas 
+Responsável Pela Revisão: 
+Direção 
+Responsável Pela Aprovação: 
+Direção 
+ 
+ 
+Sudeste Indústria e Comércio de Móveis Escolares Ltda 
+Rua Dr. Mário de Paiva, 612 sobreloja – Bairro Vila Nova – Poços de Caldas / MG - Telefone/Fax: (35) 3722-1837  
+E-mail: sudeste.moveis@gmail.com 
+ 
+CLIENTE: 
+MUNICIPIO DE SANTA CRUZ DAS PALMEIRAS 
+OS: 5594 
+CIDADE: 
+SANTA CRUZ DAS PALMEIRAS/SC 
+DATA DE EMISSÃO: 
+07/07/2025 
+DATA DA ENTREGA: 
+____/___/_____ 
+PRAZO DE ENTREGA:       06/08/2025 
+QTD 
+DESCRIÇÃO DO PRODUTO 
+75 
+CONJUNTO ALUNO CJA-03 AMARELO (TAMPO MDF) 
+03 
+CONJUNTO PROFESSOR CJP-01 
+ 
+
+---
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 1: ''
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 2: 'SF-007'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 3: 'Ordem de Serviço'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 4: 'Elaborado:'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 5: '16/04/2014'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 6: 'Revisado:'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 7: '15/12/2016'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 8: 'Revisão:'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 9: '03'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Quantidade numérica identificada: 3
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 10: 'Setor:'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 11: 'Vendas / Compras / Produção'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 12: 'Responsável Pela Elaboração:'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 13: 'Vendas'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 14: 'Responsável Pela Revisão:'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 15: 'Direção'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 16: 'Responsável Pela Aprovação:'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 17: 'Direção'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 18: ''
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 19: ''
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 20: 'Sudeste Indústria e Comércio de Móveis Escolares Ltda'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 21: 'Rua Dr. Mário de Paiva, 612 sobreloja – Bairro Vila Nova – Poços de Caldas / MG - Telefone/Fax: (35) 3722-1837'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 22: 'E-mail: sudeste.moveis@gmail.com'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 23: ''
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 24: 'CLIENTE:'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 25: 'MUNICIPIO DE SANTA CRUZ DAS PALMEIRAS'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 26: 'OS: 5594'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 27: 'CIDADE:'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 28: 'SANTA CRUZ DAS PALMEIRAS/SC'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 29: 'DATA DE EMISSÃO:'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 30: '07/07/2025'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 31: 'DATA DA ENTREGA:'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 32: '____/___/_____'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 33: 'PRAZO DE ENTREGA:       06/08/2025'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 34: 'QTD'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 35: 'DESCRIÇÃO DO PRODUTO'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 36: '75'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Quantidade numérica identificada: 75
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 37: 'CONJUNTO ALUNO CJA-03 AMARELO (TAMPO MDF)'
+[2025-07-09 09:06:14] [INFO] INFO: Item de pedido CJA encontrado no PDF 'PEDIDO - MUNICIPIO DE SANTA CRUZ DAS PALMEIRAS.pdf' (Pág 1): Modelo 'CJA-03', Quantidade '75', Tampo: 'MDF'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 38: '03'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Quantidade numérica identificada: 3
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 39: 'CONJUNTO PROFESSOR CJP-01'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 40: ''
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 41: ''
+[2025-07-09 09:06:14] [INFO] Analisando PDF: PEDIDO - MUNICIPIO DE PEDRAS GRANDES.pdf (1 páginas)
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Texto completo da página 1 de 'PEDIDO - MUNICIPIO DE PEDRAS GRANDES.pdf':
+---
+ 
+SF-007             
+Ordem de Serviço 
+Elaborado:     
+16/04/2014 
+Revisado: 
+15/12/2016 
+Revisão: 
+03 
+Setor: 
+Vendas / Compras / Produção 
+Responsável Pela Elaboração: 
+Vendas 
+Responsável Pela Revisão: 
+Direção 
+Responsável Pela Aprovação: 
+Direção 
+ 
+ 
+Sudeste Indústria e Comércio de Móveis Escolares Ltda 
+Rua Dr. Mário de Paiva, 612 sobreloja – Bairro Vila Nova – Poços de Caldas / MG - Telefone/Fax: (35) 3722-1837  
+E-mail: sudeste.moveis@gmail.com 
+ 
+CLIENTE: 
+MUNICIPIO DE PEDRAS GRANDES 
+OS: 5595 
+CIDADE: 
+PEDRAS GRANDES/SC 
+DATA DE EMISSÃO: 
+09/07/2025 
+DATA DA ENTREGA: 
+____/___/_____ 
+PRAZO DE ENTREGA:       08/08/2025 
+QTD 
+DESCRIÇÃO DO PRODUTO 
+17 
+CONJUNTO ALUNO CJA-03B AMARELO (TAMPO PLÁSTICO) 
+ 
+
+---
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 1: ''
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 2: 'SF-007'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 3: 'Ordem de Serviço'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 4: 'Elaborado:'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 5: '16/04/2014'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 6: 'Revisado:'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 7: '15/12/2016'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 8: 'Revisão:'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 9: '03'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Quantidade numérica identificada: 3
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 10: 'Setor:'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 11: 'Vendas / Compras / Produção'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 12: 'Responsável Pela Elaboração:'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 13: 'Vendas'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 14: 'Responsável Pela Revisão:'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 15: 'Direção'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 16: 'Responsável Pela Aprovação:'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 17: 'Direção'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 18: ''
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 19: ''
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 20: 'Sudeste Indústria e Comércio de Móveis Escolares Ltda'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 21: 'Rua Dr. Mário de Paiva, 612 sobreloja – Bairro Vila Nova – Poços de Caldas / MG - Telefone/Fax: (35) 3722-1837'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 22: 'E-mail: sudeste.moveis@gmail.com'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 23: ''
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 24: 'CLIENTE:'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 25: 'MUNICIPIO DE PEDRAS GRANDES'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 26: 'OS: 5595'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 27: 'CIDADE:'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 28: 'PEDRAS GRANDES/SC'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 29: 'DATA DE EMISSÃO:'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 30: '09/07/2025'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 31: 'DATA DA ENTREGA:'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 32: '____/___/_____'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 33: 'PRAZO DE ENTREGA:       08/08/2025'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 34: 'QTD'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 35: 'DESCRIÇÃO DO PRODUTO'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 36: '17'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Quantidade numérica identificada: 17
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 37: 'CONJUNTO ALUNO CJA-03B AMARELO (TAMPO PLÁSTICO)'
+[2025-07-09 09:06:14] [INFO] INFO: Item de pedido CJA encontrado no PDF 'PEDIDO - MUNICIPIO DE PEDRAS GRANDES.pdf' (Pág 1): Modelo 'CJA-03B', Quantidade '17', Tampo: 'PLASTICO'
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 38: ''
+[2025-07-09 09:06:14] [DEBUG] DEBUG: Analisando linha 39: ''
+[2025-07-09 09:06:14] [INFO] Total de novos ITENS DE PEDIDO CJA extraídos dos PDFs baixados neste ciclo: 2
+[2025-07-09 09:06:14] [INFO] Encontrados 2 ITENS DE PEDIDO para processar no backend.
+[2025-07-09 09:06:14] [INFO] Enviando Pedido OS 5594 para o backend...
+[2025-07-09 09:06:15] [INFO] Dados do pedido enviados com sucesso para o backend. Resposta: {'message': 'Pedido OS 5594 processado e estoque atualizado com sucesso.'}
+[2025-07-09 09:06:15] [INFO] Enviando Pedido OS 5595 para o backend...
+[2025-07-09 09:06:15] [INFO] Dados do pedido enviados com sucesso para o backend. Resposta: {'message': 'Pedido OS 5595 processado e estoque atualizado com sucesso.'}
+[2025-07-09 09:06:15] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
