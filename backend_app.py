@@ -67,7 +67,7 @@ def create_app():
             return f(*args, **kwargs)
         return decorated
 
-    # Rota de teste simples (SEM @token_required)
+    # Rota de teste simples
     @app.route('/test_route', methods=['GET', 'OPTIONS'])
     def test_route():
         return jsonify({"message": "Rota de teste funcionando!"}), 200
@@ -569,145 +569,144 @@ def create_app():
         else:
             return jsonify([])
 
-    # Rotas para Pedidos Pendentes (SEM @token_required)
-    @app.route('/pedidos_pendentes', methods=['GET', 'OPTIONS'])
-    def get_pedidos_pendentes():
-        # Removido a verificação de role para debug de 404/CORS
-        # if request.current_user_role not in ['producao', 'administrativo', 'admin', 'estoque_geral', 'visualizador']:
-        #     return jsonify({"message": "Permissão negada"}), 403
+    # Rotas para Pedidos Pendentes
+    # Adicionado handler OPTIONS explícito para garantir 200 OK no preflight
+    @app.route('/pedidos_pendentes', methods=['GET', 'POST', 'OPTIONS'])
+    @token_required # Re-ativado para GET e POST
+    def pedidos_pendentes_handler():
+        if request.method == 'OPTIONS':
+            # Responde ao preflight OPTIONS com 200 OK e cabeçalhos CORS
+            # Flask-CORS já deveria fazer isso, mas adicionamos explicitamente como debug
+            return '', 200
+        
+        # Se não for OPTIONS, continua com a lógica normal
+        if request.method == 'GET':
+            # Todos autenticados podem ver, mas a exibição no frontend pode ser filtrada por role
+            if request.current_user_role not in ['producao', 'administrativo', 'admin', 'estoque_geral', 'visualizador']:
+                return jsonify({"message": "Permissão negada"}), 403
 
-        if db:
-            try:
-                orders_ref = db.collection('pending_orders')
-                # Você pode adicionar filtros aqui se quiser, ex: .where('status', '!=', 'Feito')
-                docs = orders_ref.stream()
-                
-                pending_orders = []
-                for doc in docs:
-                    order_data = doc.to_dict()
-                    order_data['id'] = doc.id # Adiciona o ID do documento para uso no frontend
-                    # Converte timestamps para string ISO se existirem
-                    if 'created_at' in order_data and isinstance(order_data['created_at'], datetime):
-                        order_data['created_at'] = order_data['created_at'].isoformat()
-                    if 'updated_at' in order_data and isinstance(order_data['updated_at'], datetime):
-                        order_data['updated_at'] = order_data['updated_at'].isoformat()
-                    pending_orders.append(order_data)
-                
-                # Opcional: ordenar pedidos pendentes por data de criação ou OS
-                pending_orders.sort(key=lambda x: x.get('created_at', ''), reverse=True)
+            if db:
+                try:
+                    orders_ref = db.collection('pending_orders')
+                    docs = orders_ref.stream()
+                    
+                    pending_orders = []
+                    for doc in docs:
+                        order_data = doc.to_dict()
+                        order_data['id'] = doc.id # Adiciona o ID do documento para uso no frontend
+                        if 'created_at' in order_data and isinstance(order_data['created_at'], datetime):
+                            order_data['created_at'] = order_data['created_at'].isoformat()
+                        if 'updated_at' in order_data and isinstance(order_data['updated_at'], datetime):
+                            order_data['updated_at'] = order_data['updated_at'].isoformat()
+                        pending_orders.append(order_data)
+                    
+                    pending_orders.sort(key=lambda x: x.get('created_at', ''), reverse=True)
+                    return jsonify(pending_orders), 200
+                except Exception as e:
+                    return jsonify({"message": f"Erro ao buscar pedidos pendentes: {str(e)}"}), 500
+            else:
+                return jsonify({"message": "Firestore não está configurado. Não é possível buscar pedidos pendentes."}), 500
+        
+        elif request.method == 'POST':
+            # Este endpoint é chamado pelo script de automação e pelo frontend
+            # A automação não terá um role de usuário, então a verificação de role aqui pode ser mais flexível
+            if request.current_user_role not in ['producao', 'administrativo', 'admin', 'estoque_geral', 'visualizador']:
+                pass # A automação pode não ter um role específico, então permitimos se autenticado.
 
-                return jsonify(pending_orders), 200
-            except Exception as e:
-                return jsonify({"message": f"Erro ao buscar pedidos pendentes: {str(e)}"}), 500
-        else:
-            return jsonify({"message": "Firestore não está configurado. Não é possível buscar pedidos pendentes."}), 500
+            data = request.get_json()
+            os_number = data.get('os_number')
+            cidade_destino = data.get('cidade_destino')
+            itens = data.get('itens')
+            registrado_por = data.get('registrado_por', 'Sistema de Automação' if not request.current_username else request.current_username) 
 
-    @app.route('/pedidos_pendentes', methods=['POST', 'OPTIONS'])
-    def create_pedidos_pendentes():
-        # Removido a verificação de role para debug de 404/CORS
-        # if request.current_user_role not in ['producao', 'administrativo', 'admin', 'estoque_geral', 'visualizador']:
-        #     pass 
+            if not all([os_number, cidade_destino, itens]):
+                return jsonify({"message": "Dados do pedido incompletos"}), 400
+            if not isinstance(itens, list) or not itens:
+                return jsonify({"message": "Itens do pedido devem ser uma lista não vazia"}), 400
 
-        data = request.get_json()
-        os_number = data.get('os_number')
-        cidade_destino = data.get('cidade_destino')
-        itens = data.get('itens')
-        # O 'registrado_por' pode vir do script de automação como 'Sistema' ou do usuário logado
-        registrado_por = data.get('registrado_por', 'Sistema de Automação' if not request.current_username else request.current_username) 
+            for item in itens:
+                if not all([item.get('tipo_cja'), item.get('modelo_cja'), item.get('tampo_tipo'), item.get('quantidade')]):
+                    return jsonify({"message": "Detalhes de item incompletos no pedido (tipo_cja, modelo_cja, tampo_tipo, quantidade são obrigatórios)"}), 400
+                if not isinstance(item.get('quantidade'), int) or item.get('quantidade') <= 0:
+                    return jsonify({"message": "Quantidade de item inválida (deve ser um número inteiro positivo)"}), 400
 
-        if not all([os_number, cidade_destino, itens]):
-            return jsonify({"message": "Dados do pedido incompletos"}), 400
-        if not isinstance(itens, list) or not itens:
-            return jsonify({"message": "Itens do pedido devem ser uma lista não vazia"}), 400
+            if db:
+                try:
+                    order_data = {
+                        "os_number": os_number,
+                        "cidade_destino": cidade_destino,
+                        "itens": itens,
+                        "status": "Pendente", # Sempre começa como Pendente
+                        "created_at": datetime.now(local_tz),
+                        "created_by": registrado_por,
+                        "updated_at": datetime.now(local_tz),
+                        "updated_by": registrado_por
+                    }
 
-        for item in itens:
-            # Itens devem ser conjuntos CJA com tipo_cja, modelo_cja, tampo_tipo e quantidade
-            if not all([item.get('tipo_cja'), item.get('modelo_cja'), item.get('tampo_tipo'), item.get('quantidade')]):
-                return jsonify({"message": "Detalhes de item incompletos no pedido (tipo_cja, modelo_cja, tampo_tipo, quantidade são obrigatórios)"}), 400
-            if not isinstance(item.get('quantidade'), int) or item.get('quantidade') <= 0:
-                return jsonify({"message": "Quantidade de item inválida (deve ser um número inteiro positivo)"}), 400
+                    doc_ref = db.collection('pending_orders').add(order_data)
+                    return jsonify({"message": "Pedido pendente criado com sucesso!", "id": doc_ref[1].id}), 201
+                except Exception as e:
+                    return jsonify({"message": f"Erro ao criar pedido pendente: {str(e)}"}), 500
+            else:
+                return jsonify({"message": "Firestore não está configurado. Não é possível criar pedidos pendentes."}), 500
 
-        if db:
-            try:
-                order_data = {
-                    "os_number": os_number,
-                    "cidade_destino": cidade_destino,
-                    "itens": itens,
-                    "status": "Pendente", # Sempre começa como Pendente
-                    "created_at": datetime.now(local_tz),
-                    "created_by": registrado_por,
-                    "updated_at": datetime.now(local_tz),
-                    "updated_by": registrado_por
-                }
+    @app.route('/pedidos_pendentes/<order_id>', methods=['PUT', 'DELETE', 'OPTIONS']) # Adicionado OPTIONS
+    @token_required # Mantido para PUT e DELETE
+    def pedidos_pendentes_id_handler(order_id):
+        if request.method == 'OPTIONS':
+            return '', 200
 
-                doc_ref = db.collection('pending_orders').add(order_data)
-                return jsonify({"message": "Pedido pendente criado com sucesso!", "id": doc_ref[1].id}), 201
-            except Exception as e:
-                return jsonify({"message": f"Erro ao criar pedido pendente: {str(e)}"}), 500
-        else:
-            return jsonify({"message": "Firestore não está configurado. Não é possível criar pedidos pendentes."}), 500
+        if request.method == 'PUT':
+            if request.current_user_role not in ['producao', 'admin']: # Apenas produção e admin podem mudar status
+                return jsonify({"message": "Permissão negada para alterar status do pedido"}), 403
 
-    @app.route('/pedidos_pendentes/<order_id>', methods=['PUT', 'OPTIONS'])
-    @token_required # Mantido para PUT, pois é uma ação que modifica dados
-    def update_pedidos_pendentes_status(order_id):
-        if request.current_user_role not in ['producao', 'admin']: # Apenas produção e admin podem mudar status
-            return jsonify({"message": "Permissão negada para alterar status do pedido"}), 403
+            data = request.get_json()
+            new_status = data.get('status')
+            updated_by = data.get('updated_by') # Vem do frontend
 
-        data = request.get_json()
-        new_status = data.get('status')
-        updated_by = data.get('updated_by') # Vem do frontend
+            if not new_status:
+                return jsonify({"message": "Status é obrigatório"}), 400
 
-        if not new_status:
-            return jsonify({"message": "Status é obrigatório"}), 400
+            if db:
+                try:
+                    order_ref = db.collection('pending_orders').document(order_id)
+                    order_doc = order_ref.get()
 
-        if db:
-            try:
-                order_ref = db.collection('pending_orders').document(order_id)
-                order_doc = order_ref.get()
+                    if not order_doc.exists:
+                        return jsonify({"message": "Pedido não encontrado"}), 404
 
-                if not order_doc.exists:
-                    return jsonify({"message": "Pedido não encontrado"}), 404
+                    current_order_data = order_doc.to_dict()
+                    current_status = current_order_data.get('status')
+                    
+                    order_ref.update({
+                        'status': new_status,
+                        'updated_at': datetime.now(local_tz),
+                        'updated_by': updated_by
+                    })
+                    return jsonify({"message": f"Status do pedido {order_id} atualizado para {new_status}"}), 200
+                except Exception as e:
+                    return jsonify({"message": f"Erro ao atualizar status do pedido: {str(e)}"}), 500
+            else:
+                return jsonify({"message": "Firestore não está configurado. Não é possível atualizar pedidos pendentes."}), 500
 
-                current_order_data = order_doc.to_dict()
-                current_status = current_order_data.get('status')
+        elif request.method == 'DELETE':
+            if request.current_user_role not in ['admin']: # Apenas admin pode deletar pedidos pendentes
+                return jsonify({"message": "Permissão negada para deletar pedido pendente"}), 403
 
-                # REMOVIDO: Lógica de desconto de estoque e registro de movimentação
-                # Esta seção foi removida para garantir que a atualização de status de pedido pendente
-                # NÃO DEDUZ O ESTOQUE AUTOMATICAMENTE, conforme sua clarificação.
-                # O estoque só será afetado por "Registrar Saída Manual" ou "Reajuste de Estoque".
-                
-                # Atualiza o status do pedido pendente
-                order_ref.update({
-                    'status': new_status,
-                    'updated_at': datetime.now(local_tz),
-                    'updated_by': updated_by
-                })
-                return jsonify({"message": f"Status do pedido {order_id} atualizado para {new_status}"}), 200
-            except Exception as e:
-                return jsonify({"message": f"Erro ao atualizar status do pedido: {str(e)}"}), 500
-        else:
-            return jsonify({"message": "Firestore não está configurado. Não é possível atualizar pedidos pendentes."}), 500
+            if db:
+                try:
+                    order_ref = db.collection('pending_orders').document(order_id)
+                    order_doc = order_ref.get()
 
-    @app.route('/pedidos_pendentes/<order_id>', methods=['DELETE', 'OPTIONS'])
-    @token_required # Mantido para DELETE, pois é uma ação que modifica dados
-    def delete_pedidos_pendentes(order_id):
-        if request.current_user_role not in ['admin']: # Apenas admin pode deletar pedidos pendentes
-            return jsonify({"message": "Permissão negada para deletar pedido pendente"}), 403
-
-        if db:
-            try:
-                order_ref = db.collection('pending_orders').document(order_id)
-                order_doc = order_ref.get()
-
-                if not order_doc.exists:
-                    return jsonify({"message": "Pedido pendente não encontrado"}), 404
-                
-                order_ref.delete()
-                return jsonify({"message": f"Pedido pendente {order_id} deletado com sucesso!"}), 200
-            except Exception as e:
-                return jsonify({"message": f"Erro ao deletar pedido pendente: {str(e)}"}), 500
-        else:
-            return jsonify({"message": "Firestore não está configurado. Não é possível deletar pedidos pendentes."}), 500
+                    if not order_doc.exists:
+                        return jsonify({"message": "Pedido pendente não encontrado"}), 404
+                    
+                    order_ref.delete()
+                    return jsonify({"message": f"Pedido pendente {order_id} deletado com sucesso!"}), 200
+                except Exception as e:
+                    return jsonify({"message": f"Erro ao deletar pedido pendente: {str(e)}"}), 500
+            else:
+                return jsonify({"message": "Firestore não está configurado. Não é possível deletar pedidos pendentes."}), 500
 
 
     # Rota para Produção por CJA (para o Dashboard) - Agora aceita filtros e retorna dados por data
