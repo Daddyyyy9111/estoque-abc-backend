@@ -15,9 +15,10 @@ db = None
 def create_app():
     global db # Declara db como global para poder modificá-lo aqui
     app = Flask(__name__)
-    # Configuração CORS: Permite requisições do seu frontend no GitHub Pages
-    # Certifique-se de que a URL abaixo corresponda exatamente ao domínio do seu GitHub Pages
-    CORS(app, supports_credentials=True, resources={r"/*": {"origins": ["https://daddyyyy9111.github.io", "http://localhost:5000", "http://127.0.0.1:5000"]}})
+    
+    # Configuração CORS: Aplicar CORS globalmente para todas as rotas e métodos
+    # Isso deve garantir que o preflight OPTIONS seja tratado corretamente
+    CORS(app, supports_credentials=True, resources={r"/*": {"origins": ["https://daddyyyy9111.github.io", "http://localhost:5000", "http://127.0.0.1:5000"], "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"]}})
 
     # Define o fuso horário para consistência (ajuste se necessário)
     TIMEZONE = 'America/Sao_Paulo'
@@ -41,7 +42,7 @@ def create_app():
         print(f"An unexpected error occurred during Firebase Admin SDK initialization: {e}")
         print("Please check the format of your __firebase_config environment variable.")
 
-    # Decorator for authentication and role checking (ainda presente, mas não usado em algumas rotas)
+    # Decorator for authentication and role checking
     def token_required(f):
         @wraps(f)
         def decorated(*args, **kwargs):
@@ -67,7 +68,7 @@ def create_app():
         return decorated
 
     # Rota de teste simples (SEM @token_required)
-    @app.route('/test_route', methods=['GET', 'OPTIONS']) # Adicionado OPTIONS
+    @app.route('/test_route', methods=['GET', 'OPTIONS'])
     def test_route():
         return jsonify({"message": "Rota de teste funcionando!"}), 200
 
@@ -569,9 +570,8 @@ def create_app():
             return jsonify([])
 
     # Rotas para Pedidos Pendentes (SEM @token_required)
-    @app.route('/pedidos_pendentes', methods=['GET', 'OPTIONS']) # Adicionado OPTIONS
+    @app.route('/pedidos_pendentes', methods=['GET', 'OPTIONS'])
     def get_pedidos_pendentes():
-        # Todos autenticados podem ver, mas a exibição no frontend pode ser filtrada por role
         # Removido a verificação de role para debug de 404/CORS
         # if request.current_user_role not in ['producao', 'administrativo', 'admin', 'estoque_geral', 'visualizador']:
         #     return jsonify({"message": "Permissão negada"}), 403
@@ -602,9 +602,8 @@ def create_app():
         else:
             return jsonify({"message": "Firestore não está configurado. Não é possível buscar pedidos pendentes."}), 500
 
-    @app.route('/pedidos_pendentes', methods=['POST', 'OPTIONS']) # Adicionado OPTIONS
+    @app.route('/pedidos_pendentes', methods=['POST', 'OPTIONS'])
     def create_pedidos_pendentes():
-        # Este endpoint é chamado pelo script de automação e pelo frontend se houver criação manual de pedido pendente
         # Removido a verificação de role para debug de 404/CORS
         # if request.current_user_role not in ['producao', 'administrativo', 'admin', 'estoque_geral', 'visualizador']:
         #     pass 
@@ -648,7 +647,7 @@ def create_app():
         else:
             return jsonify({"message": "Firestore não está configurado. Não é possível criar pedidos pendentes."}), 500
 
-    @app.route('/pedidos_pendentes/<order_id>', methods=['PUT', 'OPTIONS']) # Adicionado OPTIONS
+    @app.route('/pedidos_pendentes/<order_id>', methods=['PUT', 'OPTIONS'])
     @token_required # Mantido para PUT, pois é uma ação que modifica dados
     def update_pedidos_pendentes_status(order_id):
         if request.current_user_role not in ['producao', 'admin']: # Apenas produção e admin podem mudar status
@@ -689,7 +688,7 @@ def create_app():
         else:
             return jsonify({"message": "Firestore não está configurado. Não é possível atualizar pedidos pendentes."}), 500
 
-    @app.route('/pedidos_pendentes/<order_id>', methods=['DELETE', 'OPTIONS']) # Adicionado OPTIONS
+    @app.route('/pedidos_pendentes/<order_id>', methods=['DELETE', 'OPTIONS'])
     @token_required # Mantido para DELETE, pois é uma ação que modifica dados
     def delete_pedidos_pendentes(order_id):
         if request.current_user_role not in ['admin']: # Apenas admin pode deletar pedidos pendentes
