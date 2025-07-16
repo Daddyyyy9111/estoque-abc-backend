@@ -212,19 +212,42 @@ def extract_info_from_pdf(pdf_path: str):
                             tampo = tampo.upper()
                             if 'PLÁSTICO' in tampo:
                                 tampo = 'PLASTICO'
+                            elif tampo == 'B': # Se 'B' significa Masticmol, normalize
+                                tampo = 'MASTICMOL'
                         else:
                             tampo = "N/A" # Se não encontrou tampo, define como N/A
 
+                        # Determinar tipo CJA (ZURICH ou MASTICMOL) - se não estiver no PDF, pode ser inferido ou padrão
+                        # Para este caso, como o PDF não especifica, vamos assumir um padrão ou deixar N/A
+                        # Se o modelo CJA é sempre ZURICH ou MASTICMOL, você pode adicionar essa lógica aqui.
+                        # Ex: if "ZURICH" in full_modelo.upper(): tipo_cja = "ZURICH"
+                        # Por simplicidade e para evitar inferências erradas sem mais dados, vou deixar como "N/A" ou um padrão.
+                        # No entanto, o endpoint /pedidos_pendentes espera 'tipo_cja'.
+                        # Vamos inferir com base no nome do arquivo ou no contexto, se possível.
+                        # Pelo que entendi, os pedidos são para "Conjunto Pronto".
+                        # O PDF não tem essa distinção clara, então vamos usar um padrão para o tipo_cja.
+                        # O frontend tem dropdowns para ZURICH e MASTICMOL.
+                        # Para o script de automação, vamos definir um tipo CJA padrão para os itens.
+                        # Se o PDF não especifica, é um desafio.
+                        # Para fins de demonstração, vou assumir um tipo CJA padrão ou tentar inferir.
+                        # Pelo seu `backend_app.py`, os itens de `pending_orders` precisam ter `tipo_cja`.
+                        # Vamos adicionar uma heurística simples: se o tampo for MASTICMOL, o tipo CJA é MASTICMOL. Caso contrário, ZURICH.
+                        tipo_cja = "ZURICH" # Padrão
+                        if tampo == "MASTICMOL":
+                            tipo_cja = "MASTICMOL"
+
+
                         if modelo and current_qty > 0:
                             extracted_data.append({
-                                'os_numero': os_number,
+                                'os_number': os_number, # Renomeado para 'os_number' para corresponder ao backend
                                 'cidade_destino': cidade_destino,
-                                'modelo': modelo, # Usa o modelo normalizado
+                                'tipo_cja': tipo_cja, # Adicionado tipo_cja
+                                'modelo_cja': modelo, # Renomeado para 'modelo_cja'
+                                'tampo_tipo': tampo, # Renomeado para 'tampo_tipo'
                                 'quantidade': current_qty,
-                                'tampo': tampo,
                                 'pdf_filename': os.path.basename(pdf_path)
                             })
-                            log(f"INFO: Item de pedido CJA encontrado no PDF '{os.path.basename(pdf_path)}' (Pág {page_num + 1}): Modelo Normalizado '{modelo}', Quantidade '{current_qty}', Tampo: '{tampo}'", "INFO")
+                            log(f"INFO: Item de pedido CJA encontrado no PDF '{os.path.basename(pdf_path)}' (Pág {page_num + 1}): Tipo CJA '{tipo_cja}', Modelo Normalizado '{modelo}', Quantidade '{current_qty}', Tampo: '{tampo}'", "INFO")
                         current_qty = None # Reseta a quantidade após o uso
                     else:
                         # Se a linha não é uma descrição de produto CJA válida, a quantidade anterior é irrelevante
@@ -237,50 +260,50 @@ def extract_info_from_pdf(pdf_path: str):
 # --- Funções de Atualização do Backend (API Flask) ---
 def send_order_to_backend(order_data: dict):
     """
-    Envia os dados de um pedido para o backend Flask para atualização do estoque e registro de movimentação.
+    ENVIA OS DADOS DE UM PEDIDO PARA O BACKEND FLASK PARA CRIAR UM PEDIDO PENDENTE.
+    NÃO DEDUZ ESTOQUE NESTA ETAPA.
     """
-    endpoint = f"{API_BACKEND_URL}/processar_pedido" # Novo endpoint na API Flask
+    endpoint = f"{API_BACKEND_URL}/pedidos_pendentes" # ENDPOINT CORRETO PARA CRIAR PEDIDOS PENDENTES
     try:
+        # Adiciona um campo para indicar que a requisição é da automação, se necessário
+        order_data['registrado_por'] = 'Sistema de Automação' 
         response = requests.post(endpoint, json=order_data)
         response.raise_for_status() # Lança um erro para status HTTP 4xx/5xx
-        log(f"Dados do pedido enviados com sucesso para o backend. Resposta: {response.json()}", "INFO")
+        log(f"Pedido pendente enviado com sucesso para o backend. Resposta: {response.json()}", "INFO")
     except requests.exceptions.RequestException as e:
-        log(f"Erro ao enviar dados do pedido para o backend: {e}", "ERROR")
+        log(f"Erro ao enviar pedido pendente para o backend: {e}", "ERROR")
     except Exception as e:
-        log(f"Erro inesperado ao enviar dados do pedido: {e}", "ERROR")
+        log(f"Erro inesperado ao enviar pedido pendente: {e}", "ERROR")
 
-def update_backend_from_extracted_data(extracted_items: list):
+def update_backend_from_extracted_data(all_extracted_items: list):
     """
     Prepara os dados extraídos e os envia para o backend.
     """
-    if not extracted_items:
+    if not all_extracted_items:
         log("Nenhum item de pedido para processar.", "INFO")
         return
 
-    log(f"Encontrados {len(extracted_items)} ITENS DE PEDIDO para processar no backend.", "INFO")
+    log(f"Encontrados {len(all_extracted_items)} ITENS DE PEDIDO para processar no backend.", "INFO")
 
     # Agrupar itens por OS para enviar um pedido completo por vez
-    # (A sua API Flask pode receber um pedido com múltiplos itens)
     orders_to_process = {}
-    for item in extracted_items:
-        os_num = item['os_numero']
+    for item in all_extracted_items:
+        os_num = item['os_number']
         if os_num not in orders_to_process:
             orders_to_process[os_num] = {
-                'os_numero': os_num,
+                'os_number': os_num,
                 'cidade_destino': item['cidade_destino'],
-                'data_emissao': datetime.now().strftime('%Y-%m-%d'),
-                'prazo_entrega': (datetime.now() + timedelta(days=30)).strftime('%Y-%m-%d'), # Exemplo
-                'pdf_filename': item['pdf_filename'],
                 'itens': []
             }
         orders_to_process[os_num]['itens'].append({
-            'modelo': item['modelo'],
-            'quantidade': item['quantidade'],
-            'tampo': item['tampo']
+            'tipo_cja': item['tipo_cja'], # Adicionado
+            'modelo_cja': item['modelo_cja'], # Renomeado
+            'tampo_tipo': item['tampo_tipo'], # Renomeado
+            'quantidade': item['quantidade']
         })
     
     for os_num, order_data in orders_to_process.items():
-        log(f"Enviando Pedido OS {os_num} para o backend...", "INFO")
+        log(f"Enviando Pedido OS {os_num} para o backend (criar pedido pendente)...", "INFO")
         send_order_to_backend(order_data)
 
 

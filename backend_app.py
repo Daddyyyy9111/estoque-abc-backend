@@ -68,7 +68,7 @@ def initialize_data():
             # Clear existing movements data
             for doc_ref in db.collection('movimentacoes').stream():
                 doc_ref.reference.delete()
-            # Clear existing pending orders data (RE-INTRODUCED)
+            # Clear existing pending orders data
             for doc_ref in db.collection('pending_orders').stream():
                 doc_ref.reference.delete()
             
@@ -318,15 +318,15 @@ def get_estoque():
         return jsonify([])
 
 # Endpoint to process manual entries (reajuste)
-@app.route('/processar_entrada_manual', methods=['POST'])
+@app.route('/reajuste_estoque', methods=['POST']) # Renomeado para refletir melhor a ação
 @token_required
-def processar_entrada_manual():
+def reajuste_estoque(): # Renomeada a função
     if request.current_user_role not in ['producao', 'administrativo', 'admin', 'estoque_geral']:
         return jsonify({"message": "Acesso negado. Apenas usuários autorizados podem reajustar estoque."}), 403
 
     data = request.get_json()
     itens = data.get('itens', [])
-    tipo_entrada = data.get('tipo_entrada') # 'ajuste-entrada' ou 'ajuste-saida'
+    tipo_operacao = data.get('tipo_operacao') # 'adicionar' ou 'retirar'
     descricao = data.get('descricao', '')
     registrado_por = data.get('registrado_por') # Vem do frontend
 
@@ -341,36 +341,45 @@ def processar_entrada_manual():
             for item in itens:
                 componente = item.get('componente')
                 quantidade_movimentada = item.get('quantidade')
-                tampo = item.get('tampo', 'N/A')
 
                 if not componente or quantidade_movimentada is None:
                     return jsonify({"message": "Item inválido: componente ou quantidade faltando."}), 400
+
+                # Determine the actual quantity to apply based on operation type
+                if tipo_operacao == 'retirar':
+                    quantidade_movimentada = -quantidade_movimentada # Make it negative for subtraction
 
                 query = db.collection('estoque').where('modelo', '==', componente).limit(1)
                 docs = query.stream()
                 
                 found_doc_ref = None
+                found_doc_data = None
                 for doc in docs:
                     found_doc_ref = doc.reference
+                    found_doc_data = doc.to_dict()
                     break
                 
                 if found_doc_ref:
-                    # Update existing item
+                    # Check for sufficient stock if it's a withdrawal
+                    if tipo_operacao == 'retirar' and found_doc_data['quantidade'] < abs(quantidade_movimentada):
+                        return jsonify({"message": f"Estoque insuficiente para '{componente}'. Disponível: {found_doc_data['quantidade']}, Tentativa de retirada: {abs(quantidade_movimentada)}"}), 400
+                    
                     batch.update(found_doc_ref, {'quantidade': firestore.Increment(quantidade_movimentada)})
                 else:
                     # If component not found, add it (only if quantity is positive for new entry)
-                    if quantidade_movimentada > 0:
+                    if tipo_operacao == 'adicionar' and quantidade_movimentada > 0:
                         batch.set(db.collection('estoque').document(), {'modelo': componente, 'quantidade': quantidade_movimentada})
                     else:
-                        return jsonify({"message": f"Erro: Componente '{componente}' não encontrado para retirada."}), 404
+                        return jsonify({"message": f"Erro: Componente '{componente}' não encontrado para retirada ou adição de quantidade zero/negativa."}), 404
                 
-                movimentacao_itens.append({'componente': componente, 'quantidade': quantidade_movimentada, 'tampo': tampo})
+                # Record the item as it was in the request (positive quantity for display)
+                movimentacao_itens.append({'componente': componente, 'quantidade': item.get('quantidade')})
             
             # Record the movement
             movement_record = {
                 "timestamp": datetime.now(local_tz),
-                "tipo": "Entrada - Manual",
-                "tipo_entrada": tipo_entrada,
+                "tipo": "Entrada - Manual" if tipo_operacao == 'adicionar' else "Saída - Manual", # Ajusta o tipo de movimento
+                "tipo_entrada": descricao, # Usando descrição como tipo_entrada para consistência com o frontend
                 "descricao": descricao,
                 "itens": movimentacao_itens,
                 "registrado_por": registrado_por
@@ -380,14 +389,14 @@ def processar_entrada_manual():
             batch.commit()
             return jsonify({"message": "Movimentação de estoque registrada com sucesso!"}), 200
         except Exception as e:
-            return jsonify({"message": f"Erro ao processar entrada manual: {str(e)}"}), 500
+            return jsonify({"message": f"Erro ao processar reajuste de estoque: {str(e)}"}), 500
     else:
-        return jsonify({"message": "Firestore não está configurado. Não é possível processar entradas."}), 500
+        return jsonify({"message": "Firestore não está configurado. Não é possível processar reajustes."}), 500
 
-# Endpoint to process manual orders (saida) - This is for direct manual sales, not pending orders
-@app.route('/processar_pedido_manual', methods=['POST'])
+# RENOMEADO: Endpoint para registrar saídas manuais (pedidos/OS)
+@app.route('/registrar_saida_manual', methods=['POST'])
 @token_required
-def processar_pedido_manual():
+def registrar_saida_manual():
     if request.current_user_role not in ['producao', 'administrativo', 'admin', 'estoque_geral']:
         return jsonify({"message": "Acesso negado. Apenas usuários autorizados podem registrar saídas."}), 403
 
@@ -399,21 +408,33 @@ def processar_pedido_manual():
     itens = data.get('itens', []) # Itens são os modelos de conjuntos ou componentes avulsos
     registrado_por = data.get('registrado_por') # Vem do frontend
 
-    if not os_number or not cidade_destino or not data_emissao or not prazo_entrega or not itens:
+    if not all([os_number, cidade_destino, data_emissao, prazo_entrega]):
         return jsonify({"message": "Dados do pedido incompletos."}), 400
+    if not itens:
+        return jsonify({"message": "Nenhum item para processar no pedido manual."}), 400
 
     if db:
         try:
             batch = db.batch()
+            movimentacao_itens_saida = []
+
             for item in itens:
-                modelo = item.get('modelo') 
+                # Determina o nome completo do modelo para busca no estoque
+                modelo_estoque = ""
+                if 'modelo_cja' in item and 'tampo_tipo' in item: # É um conjunto pronto
+                    # Assumimos que saídas manuais de conjuntos prontos são sempre do estoque LOCAL
+                    modelo_estoque = f"CONJUNTO-PRONTO-LOCAL-{item['tipo_cja'].upper()}-{item['modelo_cja'].upper()}-{item['tampo_tipo'].upper()}"
+                elif 'componente' in item: # É um componente avulso
+                    modelo_estoque = item['componente']
+                else:
+                    return jsonify({"message": "Item inválido no pedido manual: formato desconhecido."}), 400
+
                 quantidade_pedida = item.get('quantidade')
-                tampo = item.get('tampo', 'N/A')
 
-                if not modelo or quantidade_pedida is None or quantidade_pedida <= 0:
-                    return jsonify({"message": "Item inválido no pedido: modelo ou quantidade faltando/inválida."}), 400
+                if not modelo_estoque or quantidade_pedida is None or quantidade_pedida <= 0:
+                    return jsonify({"message": "Item inválido no pedido manual: modelo ou quantidade faltando/inválida."}), 400
 
-                query = db.collection('estoque').where('modelo', '==', modelo).limit(1)
+                query = db.collection('estoque').where('modelo', '==', modelo_estoque).limit(1)
                 docs = query.stream()
                 
                 found_doc = None
@@ -425,11 +446,14 @@ def processar_pedido_manual():
 
                 if found_doc:
                     if found_doc['quantidade'] < quantidade_pedida:
-                        return jsonify({"message": f"Estoque insuficiente para '{modelo}'. Disponível: {found_doc['quantidade']}, Pedido: {quantidade_pedida}"}), 400
+                        return jsonify({"message": f"Estoque insuficiente para '{modelo_estoque}'. Disponível: {found_doc['quantidade']}, Pedido: {quantidade_pedida}"}), 400
                     
                     batch.update(doc_ref, {'quantidade': firestore.Increment(-quantidade_pedida)})
                 else:
-                    return jsonify({"message": f"Item '{modelo}' não encontrado no estoque."}), 404
+                    return jsonify({"message": f"Item '{modelo_estoque}' não encontrado no estoque."}), 404
+                
+                # Adiciona o item ao registro de movimentação com os detalhes originais
+                movimentacao_itens_saida.append(item)
             
             # Record the movement
             movement_record = {
@@ -439,13 +463,13 @@ def processar_pedido_manual():
                 "cidade_destino": cidade_destino,
                 "data_emissao": data_emissao,
                 "prazo_entrega": prazo_entrega,
-                "itens": itens, # Store original items for detailed history
+                "itens": movimentacao_itens_saida, # Store original items for detailed history
                 "registrado_por": registrado_por
             }
             batch.set(db.collection('movimentacoes').document(), movement_record)
 
             batch.commit()
-            return jsonify({"message": "Pedido processado com sucesso!"}), 200
+            return jsonify({"message": "Pedido manual processado e estoque atualizado com sucesso!"}), 200
         except Exception as e:
             return jsonify({"message": f"Erro ao processar pedido manual: {str(e)}"}), 500
     else:
@@ -529,10 +553,10 @@ def get_movimentacoes():
     else:
         return jsonify([])
 
-# RE-INTRODUCED: Rotas para Pedidos Pendentes
-@app.route('/pending_orders', methods=['GET'])
+# Rotas para Pedidos Pendentes
+@app.route('/pedidos_pendentes', methods=['GET'])
 @token_required
-def get_pending_orders():
+def get_pedidos_pendentes():
     # Todos autenticados podem ver, mas a exibição no frontend pode ser filtrada por role
     if request.current_user_role not in ['producao', 'administrativo', 'admin', 'estoque_geral', 'visualizador']:
         return jsonify({"message": "Permissão negada"}), 403
@@ -563,17 +587,21 @@ def get_pending_orders():
     else:
         return jsonify({"message": "Firestore não está configurado. Não é possível buscar pedidos pendentes."}), 500
 
-@app.route('/pending_orders', methods=['POST'])
+@app.route('/pedidos_pendentes', methods=['POST'])
 @token_required
-def create_pending_order():
-    if request.current_user_role not in ['producao', 'administrativo', 'admin', 'estoque_geral']:
-        return jsonify({"message": "Permissão negada"}), 403
+def create_pedidos_pendentes():
+    # Este endpoint é chamado pelo script de automação e pelo frontend se houver criação manual de pedido pendente
+    # A automação não terá um role de usuário, então a verificação de role aqui pode ser mais flexível
+    # ou a automação deve usar um token de serviço. Por simplicidade, vamos permitir para qualquer token válido.
+    if request.current_user_role not in ['producao', 'administrativo', 'admin', 'estoque_geral', 'visualizador']:
+        pass # A automação pode não ter um role específico, então permitimos se autenticado.
 
     data = request.get_json()
     os_number = data.get('os_number')
     cidade_destino = data.get('cidade_destino')
     itens = data.get('itens')
-    registrado_por = data.get('registrado_por') # Vem do frontend
+    # O 'registrado_por' pode vir do script de automação como 'Sistema' ou do usuário logado
+    registrado_por = data.get('registrado_por', 'Sistema de Automação' if not request.current_username else request.current_username) 
 
     if not all([os_number, cidade_destino, itens]):
         return jsonify({"message": "Dados do pedido incompletos"}), 400
@@ -581,10 +609,11 @@ def create_pending_order():
         return jsonify({"message": "Itens do pedido devem ser uma lista não vazia"}), 400
 
     for item in itens:
+        # Itens devem ser conjuntos CJA com tipo_cja, modelo_cja, tampo_tipo e quantidade
         if not all([item.get('tipo_cja'), item.get('modelo_cja'), item.get('tampo_tipo'), item.get('quantidade')]):
-            return jsonify({"message": "Detalhes de item incompletos no pedido"}), 400
+            return jsonify({"message": "Detalhes de item incompletos no pedido (tipo_cja, modelo_cja, tampo_tipo, quantidade são obrigatórios)"}), 400
         if not isinstance(item.get('quantidade'), int) or item.get('quantidade') <= 0:
-            return jsonify({"message": "Quantidade de item inválida"}), 400
+            return jsonify({"message": "Quantidade de item inválida (deve ser um número inteiro positivo)"}), 400
 
     if db:
         try:
@@ -606,9 +635,9 @@ def create_pending_order():
     else:
         return jsonify({"message": "Firestore não está configurado. Não é possível criar pedidos pendentes."}), 500
 
-@app.route('/pending_orders/<order_id>', methods=['PUT'])
+@app.route('/pedidos_pendentes/<order_id>', methods=['PUT'])
 @token_required
-def update_pending_order_status(order_id):
+def update_pedidos_pendentes_status(order_id):
     if request.current_user_role not in ['producao', 'admin']: # Apenas produção e admin podem mudar status
         return jsonify({"message": "Permissão negada para alterar status do pedido"}), 403
 
@@ -630,59 +659,10 @@ def update_pending_order_status(order_id):
             current_order_data = order_doc.to_dict()
             current_status = current_order_data.get('status')
 
-            # Lógica de desconto de estoque e registro de movimentação se o status for "Feito"
-            if new_status == 'Feito' and current_status != 'Feito': # Evita descontar múltiplas vezes
-                itens_do_pedido = current_order_data.get('itens', [])
-                
-                batch = db.batch()
-                movimentacao_itens_saida = []
-
-                for item in itens_do_pedido:
-                    tipo_cja = item.get('tipo_cja')
-                    modelo_cja = item.get('modelo_cja')
-                    tampo_tipo = item.get('tampo_tipo')
-                    quantidade = item.get('quantidade')
-
-                    # Nome do modelo no estoque de conjuntos prontos
-                    # Assumindo que o estoque de conjuntos prontos é sempre LOCAL para pedidos pendentes
-                    modelo_completo_estoque = f"CONJUNTO-PRONTO-LOCAL-{tipo_cja.upper()}-{modelo_cja.upper()}-{tampo_tipo.upper()}"
-                    
-                    query = db.collection('estoque').where('modelo', '==', modelo_completo_estoque).limit(1)
-                    docs = query.stream()
-                    
-                    found_doc = None
-                    doc_ref = None
-                    for doc in docs:
-                        found_doc = doc.to_dict()
-                        doc_ref = doc.reference
-                        break
-
-                    if not found_doc or found_doc['quantidade'] < quantidade:
-                        # Se não há estoque suficiente, aborte a operação e retorne erro
-                        return jsonify({"message": f"Estoque insuficiente para {modelo_completo_estoque}. Disponível: {found_doc.get('quantidade', 0) if found_doc else 0}"}), 400
-
-                    # Desconta do estoque
-                    batch.update(doc_ref, {'quantidade': firestore.Increment(-quantidade)})
-                    movimentacao_itens_saida.append({
-                        'modelo': modelo_completo_estoque, 
-                        'quantidade': quantidade, 
-                        'tampo': tampo_tipo
-                    })
-
-                # Registra a movimentação de saída
-                movimentacao_data = {
-                    "tipo": "Saída - Pedido",
-                    "os_number": current_order_data.get('os_number'),
-                    "cidade_destino": current_order_data.get('cidade_destino'),
-                    "data_emissao": datetime.now(local_tz).strftime('%Y-%m-%d'), # Data atual da saída
-                    "prazo_entrega": current_order_data.get('prazo_entrega', ''), # Se você tiver esse campo
-                    "itens": movimentacao_itens_saida,
-                    "timestamp": datetime.now(local_tz),
-                    "registrado_por": updated_by # Quem marcou como "Feito"
-                }
-                batch.set(db.collection('movimentacoes').document(), movimentacao_data)
-
-                batch.commit() # Commit the batch (stock update and movement record)
+            # REMOVIDO: Lógica de desconto de estoque e registro de movimentação
+            # Esta seção foi removida para garantir que a atualização de status de pedido pendente
+            # NÃO DEDUZ O ESTOQUE AUTOMATICAMENTE, conforme sua clarificação.
+            # O estoque só será afetado por "Registrar Saída Manual" ou "Reajuste de Estoque".
             
             # Atualiza o status do pedido pendente
             order_ref.update({
@@ -696,7 +676,29 @@ def update_pending_order_status(order_id):
     else:
         return jsonify({"message": "Firestore não está configurado. Não é possível atualizar pedidos pendentes."}), 500
 
-# MODIFIED: Rota para Produção por CJA (para o Dashboard) - Agora aceita filtros e retorna dados por data
+@app.route('/pedidos_pendentes/<order_id>', methods=['DELETE'])
+@token_required
+def delete_pedidos_pendentes(order_id):
+    if request.current_user_role not in ['admin']: # Apenas admin pode deletar pedidos pendentes
+        return jsonify({"message": "Permissão negada para deletar pedido pendente"}), 403
+
+    if db:
+        try:
+            order_ref = db.collection('pending_orders').document(order_id)
+            order_doc = order_ref.get()
+
+            if not order_doc.exists:
+                return jsonify({"message": "Pedido pendente não encontrado"}), 404
+            
+            order_ref.delete()
+            return jsonify({"message": f"Pedido pendente {order_id} deletado com sucesso!"}), 200
+        except Exception as e:
+            return jsonify({"message": f"Erro ao deletar pedido pendente: {str(e)}"}), 500
+    else:
+        return jsonify({"message": "Firestore não está configurado. Não é possível deletar pedidos pendentes."}), 500
+
+
+# Rota para Produção por CJA (para o Dashboard) - Agora aceita filtros e retorna dados por data
 @app.route('/production_summary', methods=['GET'])
 @token_required
 def get_production_summary():
@@ -715,8 +717,8 @@ def get_production_summary():
                 start_date = today - timedelta(days=7)
                 start_date = datetime(start_date.year, start_date.month, start_date.day, 0, 0, 0, tzinfo=local_tz)
             else: # monthly
-                # Começa no início do mês atual
-                start_date = datetime(today.year, today.month, 1, 0, 0, 0, tzinfo=local_tz)
+                # Começa no início do mês atual (para 6 meses, a lógica de agregação será no frontend)
+                start_date = datetime(today.year, today.month - 5, 1, 0, 0, 0, tzinfo=local_tz) # Busca 6 meses para trás
 
             production_summary = {} # Dicionário para armazenar produção por período (data)
 
@@ -748,7 +750,9 @@ def get_production_summary():
             def sort_key_func(x):
                 if period == 'weekly':
                     # Adiciona um ano fixo para que a comparação de data funcione corretamente
-                    return datetime.strptime(x + f'/{today.year}', '%d/%b/%Y')
+                    # Assume que a semana é do ano atual para ordenação
+                    current_year = datetime.now(local_tz).year
+                    return datetime.strptime(x + f'/{current_year}', '%d/%b/%Y')
                 else: # monthly
                     # Assume que o ano está no formato 'YY' e o completa para 'YYYY'
                     return datetime.strptime(x, '%b/%y')
@@ -767,4 +771,3 @@ def get_production_summary():
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT', 5000))
-
