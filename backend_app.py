@@ -201,7 +201,13 @@ def login():
 # Logout endpoint (client-side token removal)
 @app.route('/logout', methods=['POST'])
 def logout():
-    return jsonify({"message": "Logout bem-sucedido."}), 200
+    return jsonify({"message": "Logout bem-sucedido."}), 200    
+
+# Rota de teste simples
+@app.route('/test_route', methods=['GET'])
+def test_route():
+    return jsonify({"message": "Rota de teste funcionando!"}), 200
+
 
 # Endpoint to create a new user (admin only)
 @app.route('/create_user', methods=['POST'])
