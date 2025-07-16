@@ -1,7 +1,6 @@
 import os
 import json
-from flask import Flask, request, jsonify, make_response # Importa make_response
-from flask_cors import cross_origin # Mantemos cross_origin para outras rotas se necessário, mas o global foi removido
+from flask import Flask, request, jsonify, make_response
 from datetime import datetime, timedelta
 import firebase_admin
 from firebase_admin import credentials, firestore, auth
@@ -13,12 +12,9 @@ db = None
 
 # Função para criar e configurar a aplicação Flask
 def create_app():
-    global db # Declara db como global para poder modificá-lo aqui
+    global db 
     app = Flask(__name__)
     
-    # REMOVIDO: Configuração CORS global (se ainda estivesse lá)
-    # REMOVIDO: Decoradores @cross_origin em cada rota. Vamos usar o handler genérico para OPTIONS.
-
     # Define o fuso horário para consistência (ajuste se necessário)
     TIMEZONE = 'America/Sao_Paulo'
     local_tz = pytz.timezone(TIMEZONE)
@@ -27,7 +23,6 @@ def create_app():
         firebase_config_str = os.environ.get('__firebase_config')
         if firebase_config_str:
             cred = credentials.Certificate(json.loads(firebase_config_str))
-            # Verifica se o app já foi inicializado para evitar erro
             if not firebase_admin._apps:
                 firebase_admin.initialize_app(cred)
             db = firestore.client()
@@ -67,9 +62,9 @@ def create_app():
         return decorated
 
     # ====================================================================
-    # NOVO: Handler genérico para requisições OPTIONS (Preflight CORS)
+    # Handler genérico para requisições OPTIONS (Preflight CORS)
     # Isso deve capturar TODAS as requisições OPTIONS e responder com 200 OK
-    # e os cabeçalhos CORS necessários, contornando o problema.
+    # e os cabeçalhos CORS necessários.
     # ====================================================================
     @app.after_request
     def add_cors_headers(response):
@@ -79,22 +74,23 @@ def create_app():
         response.headers['Access-Control-Allow-Credentials'] = 'true'
         return response
 
+    # Este handler captura todas as requisições OPTIONS para qualquer rota
+    # e retorna um 200 OK. Isso é vital para o preflight do CORS.
     @app.route('/<path:path>', methods=['OPTIONS'])
-    def options_handler(path):
-        # Este handler captura todas as requisições OPTIONS para qualquer rota
-        # e retorna um 200 OK com os cabeçalhos CORS.
-        # O Flask-CORS (se estivesse ativo globalmente) já faria isso,
-        # mas estamos forçando para contornar o problema no Render.
+    @app.route('/', methods=['OPTIONS']) # Para a raiz também
+    def options_handler(path=None):
         return '', 200
     # ====================================================================
 
     # Rota de teste simples
-    @app.route('/test_route', methods=['GET']) # Removido OPTIONS, pois o handler genérico cuida
+    @app.route('/test_route', methods=['GET'])
+    @token_required # Mantemos a autenticação para testar se é o decorador
     def test_route():
         return jsonify({"message": "Rota de teste funcionando!"}), 200
 
     # Endpoint to initialize/reset data (for testing purposes)
     @app.route('/initialize_data', methods=['POST'])
+    @token_required
     def initialize_data():
         if db:
             try:
@@ -591,7 +587,6 @@ def create_app():
     @app.route('/pedidos_pendentes', methods=['GET', 'POST']) # Removido OPTIONS, pois o handler genérico cuida
     @token_required 
     def pedidos_pendentes_handler():
-        # Se não for OPTIONS, continua com a lógica normal
         if request.method == 'GET':
             # Todos autenticados podem ver, mas a exibição no frontend pode ser filtrada por role
             if request.current_user_role not in ['producao', 'administrativo', 'admin', 'estoque_geral', 'visualizador']:
