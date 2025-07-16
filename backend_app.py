@@ -90,7 +90,8 @@ def initialize_data():
                 "amanda": {"password": "amanda123", "role": "administrativo"},
                 "matheus": {"password": "matheus123", "role": "estoque_geral"},
                 "thiago": {"password": "producao123", "role": "producao"},
-                "rian": {"password": "rian123", "role": "visualizador"}
+                "rian": {"password": "rian123", "role": "visualizador"},
+                "automacao": {"password": "auto123", "role": "producao"} # NOVO USUÁRIO PARA AUTOMAÇÃO
             }
             for username, user_data in default_users.items():
                 email = f"{username}@example.com" # Firebase Auth requires an email

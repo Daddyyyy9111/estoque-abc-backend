@@ -22,6 +22,15 @@ PROCESSED_LIST_FILE = 'processed_emails.json'
 # URL base do seu backend no Render.com
 API_BACKEND_URL = 'https://estoque-abc-frontend.onrender.com' # Verifique se esta é a URL correta do seu backend
 
+# --- Configurações do Firebase Auth para Automação ---
+# Você pode encontrar esta API Key no Firebase Console -> Project settings -> General -> Web API Key
+FIREBASE_API_KEY = "AIzaSyA0NNzu5Uuhoq1IYtiIz3QLJZAzywUwd9M" # <--- SUBSTITUA PELA SUA CHAVE DE API REAL DO FIREBASE
+AUTOMATION_EMAIL = "automacao@example.com" # Email do usuário de automação criado no backend
+AUTOMATION_PASSWORD = "auto123" # Senha do usuário de automação
+
+# Variável global para armazenar o token de autenticação
+AUTH_TOKEN = None
+
 # --- Funções de Log ---
 def log(msg: str, level: str = "INFO"):
     """Registra mensagens no console e em um arquivo de log."""
@@ -218,20 +227,6 @@ def extract_info_from_pdf(pdf_path: str):
                             tampo = "N/A" # Se não encontrou tampo, define como N/A
 
                         # Determinar tipo CJA (ZURICH ou MASTICMOL) - se não estiver no PDF, pode ser inferido ou padrão
-                        # Para este caso, como o PDF não especifica, vamos assumir um padrão ou deixar N/A
-                        # Se o modelo CJA é sempre ZURICH ou MASTICMOL, você pode adicionar essa lógica aqui.
-                        # Ex: if "ZURICH" in full_modelo.upper(): tipo_cja = "ZURICH"
-                        # Por simplicidade e para evitar inferências erradas sem mais dados, vou deixar como "N/A" ou um padrão.
-                        # No entanto, o endpoint /pedidos_pendentes espera 'tipo_cja'.
-                        # Vamos inferir com base no nome do arquivo ou no contexto, se possível.
-                        # Pelo que entendi, os pedidos são para "Conjunto Pronto".
-                        # O PDF não tem essa distinção clara, então vamos usar um padrão para o tipo_cja.
-                        # O frontend tem dropdowns para ZURICH e MASTICMOL.
-                        # Para o script de automação, vamos definir um tipo CJA padrão para os itens.
-                        # Se o PDF não especifica, é um desafio.
-                        # Para fins de demonstração, vou assumir um tipo CJA padrão ou tentar inferir.
-                        # Pelo seu `backend_app.py`, os itens de `pending_orders` precisam ter `tipo_cja`.
-                        # Vamos adicionar uma heurística simples: se o tampo for MASTICMOL, o tipo CJA é MASTICMOL. Caso contrário, ZURICH.
                         tipo_cja = "ZURICH" # Padrão
                         if tampo == "MASTICMOL":
                             tipo_cja = "MASTICMOL"
@@ -257,21 +252,76 @@ def extract_info_from_pdf(pdf_path: str):
         log(f"Erro ao extrair informações de {os.path.basename(pdf_path)}: {e}", "ERROR")
     return extracted_data
 
+# --- Funções de Autenticação Firebase ---
+def get_firebase_id_token():
+    """
+    Obtém um ID Token do Firebase Authentication usando as credenciais do usuário de automação.
+    """
+    global AUTH_TOKEN
+    if AUTH_TOKEN:
+        # Em um cenário real, você verificaria a expiração do token aqui
+        # e o renovaria se necessário. Para simplicidade, vamos tentar obter um novo a cada ciclo
+        # ou apenas usar o existente se já tiver sido obtido.
+        log("Token de autenticação já existe, reutilizando.", "INFO")
+        return AUTH_TOKEN
+
+    log(f"Obtendo novo token de autenticação para {AUTOMATION_EMAIL}...", "INFO")
+    auth_url = f"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={FIREBASE_API_KEY}"
+    payload = json.dumps({
+        "email": AUTOMATION_EMAIL,
+        "password": AUTOMATION_PASSWORD,
+        "returnSecureToken": True
+    })
+    headers = {"Content-Type": "application/json"}
+
+    try:
+        response = requests.post(auth_url, data=payload, headers=headers)
+        response.raise_for_status() # Lança um erro para status HTTP 4xx/5xx
+        AUTH_TOKEN = response.json()['idToken']
+        log("Token de autenticação Firebase obtido com sucesso.", "INFO")
+        return AUTH_TOKEN
+    except requests.exceptions.RequestException as e:
+        log(f"Erro ao obter token de autenticação Firebase: {e}", "ERROR")
+        AUTH_TOKEN = None
+        return None
+    except Exception as e:
+        log(f"Erro inesperado ao obter token de autenticação: {e}", "ERROR")
+        AUTH_TOKEN = None
+        return None
+
 # --- Funções de Atualização do Backend (API Flask) ---
 def send_order_to_backend(order_data: dict):
     """
     ENVIA OS DADOS DE UM PEDIDO PARA O BACKEND FLASK PARA CRIAR UM PEDIDO PENDENTE.
     NÃO DEDUZ ESTOQUE NESTA ETAPA.
     """
+    global AUTH_TOKEN
+    if not AUTH_TOKEN:
+        log("Nenhum token de autenticação disponível. Tentando obter um.", "WARNING")
+        AUTH_TOKEN = get_firebase_id_token()
+        if not AUTH_TOKEN:
+            log("Falha ao obter token de autenticação, não é possível enviar o pedido.", "ERROR")
+            return
+
     endpoint = f"{API_BACKEND_URL}/pedidos_pendentes" # ENDPOINT CORRETO PARA CRIAR PEDIDOS PENDENTES
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {AUTH_TOKEN}" # Inclui o token de autenticação
+    }
+
     try:
         # Adiciona um campo para indicar que a requisição é da automação, se necessário
         order_data['registrado_por'] = 'Sistema de Automação' 
-        response = requests.post(endpoint, json=order_data)
+        response = requests.post(endpoint, json=order_data, headers=headers)
         response.raise_for_status() # Lança um erro para status HTTP 4xx/5xx
         log(f"Pedido pendente enviado com sucesso para o backend. Resposta: {response.json()}", "INFO")
+    except requests.exceptions.HTTPError as http_err:
+        log(f"Erro HTTP ao enviar pedido pendente: {http_err.response.status_code} - {http_err.response.text}", "ERROR")
+        if http_err.response.status_code == 401:
+            log("Token de autenticação pode estar expirado ou inválido. Forçando renovação.", "WARNING")
+            AUTH_TOKEN = None # Invalida o token para forçar uma nova tentativa de login
     except requests.exceptions.RequestException as e:
-        log(f"Erro ao enviar pedido pendente para o backend: {e}", "ERROR")
+        log(f"Erro de conexão ao enviar pedido pendente para o backend: {e}", "ERROR")
     except Exception as e:
         log(f"Erro inesperado ao enviar pedido pendente: {e}", "ERROR")
 
@@ -312,6 +362,12 @@ def main():
     ensure_pdf_folder_exists()
     processed_emails = load_processed_emails() 
 
+    # Tenta obter o token de autenticação logo no início
+    global AUTH_TOKEN
+    AUTH_TOKEN = get_firebase_id_token()
+    if not AUTH_TOKEN:
+        log("Não foi possível obter o token de autenticação inicial. O script pode falhar ao enviar pedidos.", "CRITICAL")
+
     while True:
         log("\n==== Início do Ciclo de Verificação de Pedidos ====", "INFO")
         log("Iniciando busca por novos emails e PDFs...", "INFO")
@@ -319,7 +375,7 @@ def main():
         mail = connect_to_email()
         if mail:
             new_pdfs = fetch_new_emails(mail, processed_emails)
-            save_processed_emails(processed_emails) 
+            save_processed_emails(processed_list) 
             log(f"Novos PDFs baixados neste ciclo: {len(new_pdfs)}", "INFO")
             
             if new_pdfs:

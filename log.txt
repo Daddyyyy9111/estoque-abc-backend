@@ -213,3 +213,166 @@ CONJUNTO ALUNO CJA-03B AMARELO (TAMPO PLÁSTICO)
 [2025-07-16 11:54:53] [INFO] Novos PDFs baixados neste ciclo: 0
 [2025-07-16 11:54:53] [INFO] Nenhum novo PDF para processar neste ciclo.
 [2025-07-16 11:54:53] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-16 13:40:34] [INFO] === Iniciando o automatizador de Pedidos ABC Móveis ===
+[2025-07-16 13:40:34] [INFO] Carregados 2 itens de pedido da lista de processados.
+[2025-07-16 13:40:34] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-16 13:40:34] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-16 13:40:35] [INFO] Conectando ao servidor IMAP: imap.gmail.com
+[2025-07-16 13:40:35] [INFO] Login IMAP bem-sucedido.
+[2025-07-16 13:40:36] [INFO] Emails não lidos encontrados: 0
+[2025-07-16 13:40:37] [INFO] Lista de emails processados salva. Total: 2
+[2025-07-16 13:40:37] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-16 13:40:37] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-16 13:40:37] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-16 13:40:47] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-16 13:40:47] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-16 13:40:47] [INFO] Conectando ao servidor IMAP: imap.gmail.com
+[2025-07-16 13:40:48] [INFO] Login IMAP bem-sucedido.
+[2025-07-16 13:40:49] [INFO] Emails não lidos encontrados: 1
+[2025-07-16 13:40:50] [INFO] Processando email ID 249 - Assunto: 'OS 5614 - MUNICIPIO DE IRATI/SC'
+[2025-07-16 13:40:50] [INFO] PDF salvo (contém 'PEDIDO'): PEDIDO - MUNICIPIO DE IRATI.pdf em ./Pedidos_PDF\PEDIDO - MUNICIPIO DE IRATI.pdf
+[2025-07-16 13:40:50] [INFO] PDF 'OS 5614 - PLANO DE CORTE - MUNICIPIO DE IRATI.pdf' não contém 'PEDIDO' no nome ou não é um PDF. Ignorando.
+[2025-07-16 13:40:50] [INFO] PDF 'OS 5614 - CONTROLE DE PRODUÇÃO - MUNICIPIO DE IRATI.pdf' não contém 'PEDIDO' no nome ou não é um PDF. Ignorando.
+[2025-07-16 13:40:51] [INFO] Email ID 249 marcado como lido.
+[2025-07-16 13:40:51] [INFO] Lista de emails processados salva. Total: 3
+[2025-07-16 13:40:51] [INFO] Novos PDFs baixados neste ciclo: 1
+[2025-07-16 13:40:51] [INFO] Iniciando extração de informações dos PDFs recém-baixados...
+[2025-07-16 13:40:51] [INFO] Analisando PDF: PEDIDO - MUNICIPIO DE IRATI.pdf (1 páginas)
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Texto completo da página 1 de 'PEDIDO - MUNICIPIO DE IRATI.pdf':
+---
+ 
+SF-007             
+Ordem de Serviço 
+Elaborado:     
+16/04/2014 
+Revisado: 
+15/12/2016 
+Revisão: 
+03 
+Setor: 
+Vendas / Compras / Produção 
+Responsável Pela Elaboração: 
+Vendas 
+Responsável Pela Revisão: 
+Direção 
+Responsável Pela Aprovação: 
+Direção 
+ 
+ 
+Sudeste Indústria e Comércio de Móveis Escolares Ltda 
+Rua Dr. Mário de Paiva, 612 sobreloja – Bairro Vila Nova – Poços de Caldas / MG - Telefone/Fax: (35) 3722-1837  
+E-mail: sudeste.moveis@gmail.com 
+ 
+CLIENTE: 
+MUNICIPIO DE IRATI 
+OS: 5614 
+CIDADE: 
+IRATI/SC 
+DATA DE EMISSÃO: 
+15/07/2025 
+DATA DA ENTREGA: 
+____/___/_____ 
+PRAZO DE ENTREGA:       14/08/2025 
+QTD 
+DESCRIÇÃO DO PRODUTO 
+50 
+CONJUNTO ALUNO TAMANHO CJA-06 AZUL (TAMPO MDF) 
+ 
+
+---
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 1: ''
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 2: 'SF-007'
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 3: 'Ordem de Serviço'
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 4: 'Elaborado:'
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 5: '16/04/2014'
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 6: 'Revisado:'
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 7: '15/12/2016'
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 8: 'Revisão:'
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 9: '03'
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Quantidade numérica identificada: 3
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 10: 'Setor:'
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 11: 'Vendas / Compras / Produção'
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 12: 'Responsável Pela Elaboração:'
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 13: 'Vendas'
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 14: 'Responsável Pela Revisão:'
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 15: 'Direção'
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 16: 'Responsável Pela Aprovação:'
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 17: 'Direção'
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 18: ''
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 19: ''
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 20: 'Sudeste Indústria e Comércio de Móveis Escolares Ltda'
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 21: 'Rua Dr. Mário de Paiva, 612 sobreloja – Bairro Vila Nova – Poços de Caldas / MG - Telefone/Fax: (35) 3722-1837'
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 22: 'E-mail: sudeste.moveis@gmail.com'
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 23: ''
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 24: 'CLIENTE:'
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 25: 'MUNICIPIO DE IRATI'
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 26: 'OS: 5614'
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 27: 'CIDADE:'
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 28: 'IRATI/SC'
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 29: 'DATA DE EMISSÃO:'
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 30: '15/07/2025'
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 31: 'DATA DA ENTREGA:'
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 32: '____/___/_____'
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 33: 'PRAZO DE ENTREGA:       14/08/2025'
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 34: 'QTD'
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 35: 'DESCRIÇÃO DO PRODUTO'
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 36: '50'
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Quantidade numérica identificada: 50
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 37: 'CONJUNTO ALUNO TAMANHO CJA-06 AZUL (TAMPO MDF)'
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Modelo 'CJA-06' normalizado para 'CJA-06'
+[2025-07-16 13:40:51] [INFO] INFO: Item de pedido CJA encontrado no PDF 'PEDIDO - MUNICIPIO DE IRATI.pdf' (Pág 1): Tipo CJA 'ZURICH', Modelo Normalizado 'CJA-06', Quantidade '50', Tampo: 'MDF'
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 38: ''
+[2025-07-16 13:40:51] [DEBUG] DEBUG: Analisando linha 39: ''
+[2025-07-16 13:40:51] [INFO] Total de novos ITENS DE PEDIDO CJA extraídos dos PDFs baixados neste ciclo: 1
+[2025-07-16 13:40:51] [INFO] Encontrados 1 ITENS DE PEDIDO para processar no backend.
+[2025-07-16 13:40:51] [INFO] Enviando Pedido OS 5614 para o backend (criar pedido pendente)...
+[2025-07-16 13:40:51] [ERROR] Erro ao enviar pedido pendente para o backend: 401 Client Error: Unauthorized for url: https://estoque-abc-frontend.onrender.com/pedidos_pendentes
+[2025-07-16 13:40:51] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-16 13:41:01] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-16 13:41:01] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-16 13:41:02] [INFO] Conectando ao servidor IMAP: imap.gmail.com
+[2025-07-16 13:41:03] [INFO] Login IMAP bem-sucedido.
+[2025-07-16 13:41:04] [INFO] Emails não lidos encontrados: 0
+[2025-07-16 13:41:04] [INFO] Lista de emails processados salva. Total: 3
+[2025-07-16 13:41:04] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-16 13:41:04] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-16 13:41:04] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-16 13:41:14] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-16 13:41:14] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-16 13:41:15] [INFO] Conectando ao servidor IMAP: imap.gmail.com
+[2025-07-16 13:41:16] [INFO] Login IMAP bem-sucedido.
+[2025-07-16 13:41:17] [INFO] Emails não lidos encontrados: 0
+[2025-07-16 13:41:17] [INFO] Lista de emails processados salva. Total: 3
+[2025-07-16 13:41:17] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-16 13:41:17] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-16 13:41:17] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-16 13:41:27] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-16 13:41:27] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-16 13:41:28] [INFO] Conectando ao servidor IMAP: imap.gmail.com
+[2025-07-16 13:41:29] [INFO] Login IMAP bem-sucedido.
+[2025-07-16 13:41:30] [INFO] Emails não lidos encontrados: 0
+[2025-07-16 13:41:31] [INFO] Lista de emails processados salva. Total: 3
+[2025-07-16 13:41:31] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-16 13:41:31] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-16 13:41:31] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-16 13:41:41] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-16 13:41:41] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-16 13:41:41] [INFO] Conectando ao servidor IMAP: imap.gmail.com
+[2025-07-16 13:41:42] [INFO] Login IMAP bem-sucedido.
+[2025-07-16 13:41:43] [INFO] Emails não lidos encontrados: 0
+[2025-07-16 13:41:44] [INFO] Lista de emails processados salva. Total: 3
+[2025-07-16 13:41:44] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-16 13:41:44] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-16 13:41:44] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-16 13:41:54] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-16 13:41:54] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-16 13:41:54] [INFO] Conectando ao servidor IMAP: imap.gmail.com
+[2025-07-16 13:41:55] [INFO] Login IMAP bem-sucedido.
+[2025-07-16 13:41:56] [INFO] Emails não lidos encontrados: 0
