@@ -1,7 +1,7 @@
 import os
 import json
 from flask import Flask, request, jsonify
-from flask_cors import CORS
+from flask_cors import cross_origin # Importa cross_origin
 from datetime import datetime, timedelta
 import firebase_admin
 from firebase_admin import credentials, firestore, auth
@@ -16,9 +16,8 @@ def create_app():
     global db # Declara db como global para poder modificá-lo aqui
     app = Flask(__name__)
     
-    # Configuração CORS: Aplicar CORS globalmente para todas as rotas e métodos
-    # Isso deve garantir que o preflight OPTIONS seja tratado corretamente
-    CORS(app, supports_credentials=True, resources={r"/*": {"origins": ["https://daddyyyy9111.github.io", "http://localhost:5000", "http://127.0.0.1:5000"], "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"]}})
+    # REMOVIDO: Configuração CORS global
+    # CORS(app, supports_credentials=True, resources={r"/*": {"origins": ["https://daddyyyy9111.github.io", "http://localhost:5000", "http://127.0.0.1:5000"], "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"]}})
 
     # Define o fuso horário para consistência (ajuste se necessário)
     TIMEZONE = 'America/Sao_Paulo'
@@ -69,11 +68,13 @@ def create_app():
 
     # Rota de teste simples
     @app.route('/test_route', methods=['GET', 'OPTIONS'])
+    @cross_origin(origins=["https://daddyyyy9111.github.io", "http://localhost:5000", "http://127.0.0.1:5000"], supports_credentials=True)
     def test_route():
         return jsonify({"message": "Rota de teste funcionando!"}), 200
 
     # Endpoint to initialize/reset data (for testing purposes)
     @app.route('/initialize_data', methods=['POST'])
+    @cross_origin(origins=["https://daddyyyy9111.github.io", "http://localhost:5000", "http://127.0.0.1:5000"], supports_credentials=True)
     def initialize_data():
         if db:
             try:
@@ -184,6 +185,7 @@ def create_app():
 
     # Login endpoint (Frontend handles Firebase Auth login, this is just a placeholder/check)
     @app.route('/login', methods=['POST'])
+    @cross_origin(origins=["https://daddyyyy9111.github.io", "http://localhost:5000", "http://127.0.0.1:5000"], supports_credentials=True)
     def login():
         data = request.get_json()
         username = data.get('username')
@@ -213,11 +215,13 @@ def create_app():
 
     # Logout endpoint (client-side token removal)
     @app.route('/logout', methods=['POST'])
+    @cross_origin(origins=["https://daddyyyy9111.github.io", "http://localhost:5000", "http://127.0.0.1:5000"], supports_credentials=True)
     def logout():
         return jsonify({"message": "Logout bem-sucedido."}), 200
 
     # Endpoint to create a new user (admin only)
     @app.route('/create_user', methods=['POST'])
+    @cross_origin(origins=["https://daddyyyy9111.github.io", "http://localhost:5000", "http://127.0.0.1:5000"], supports_credentials=True)
     @token_required
     def create_user():
         if request.current_user_role != 'admin':
@@ -264,6 +268,7 @@ def create_app():
 
     # Endpoint to get all users (admin only) - for display in frontend
     @app.route('/users', methods=['GET'])
+    @cross_origin(origins=["https://daddyyyy9111.github.io", "http://localhost:5000", "http://127.0.0.1:5000"], supports_credentials=True)
     @token_required
     def get_users():
         if request.current_user_role != 'admin':
@@ -287,6 +292,7 @@ def create_app():
 
     # Endpoint to delete a user (admin only)
     @app.route('/delete_user/<username>', methods=['DELETE'])
+    @cross_origin(origins=["https://daddyyyy9111.github.io", "http://localhost:5000", "http://127.0.0.1:5000"], supports_credentials=True)
     @token_required
     def delete_user(username):
         if request.current_user_role != 'admin':
@@ -319,6 +325,7 @@ def create_app():
 
     # Endpoint to get stock data
     @app.route('/estoque', methods=['GET'])
+    @cross_origin(origins=["https://daddyyyy9111.github.io", "http://localhost:5000", "http://127.0.0.1:5000"], supports_credentials=True)
     @token_required
     def get_estoque():
         if db:
@@ -335,6 +342,7 @@ def create_app():
 
     # Endpoint to process manual entries (reajuste)
     @app.route('/reajuste_estoque', methods=['POST']) # Renomeado para refletir melhor a ação
+    @cross_origin(origins=["https://daddyyyy9111.github.io", "http://localhost:5000", "http://127.0.0.1:5000"], supports_credentials=True)
     @token_required
     def reajuste_estoque(): # Renomeada a função
         if request.current_user_role not in ['producao', 'administrativo', 'admin', 'estoque_geral']:
@@ -411,6 +419,7 @@ def create_app():
 
     # RENOMEADO: Endpoint para registrar saídas manuais (pedidos/OS)
     @app.route('/registrar_saida_manual', methods=['POST'])
+    @cross_origin(origins=["https://daddyyyy9111.github.io", "http://localhost:5000", "http://127.0.0.1:5000"], supports_credentials=True)
     @token_required
     def registrar_saida_manual():
         if request.current_user_role not in ['producao', 'administrativo', 'admin', 'estoque_geral']:
@@ -493,6 +502,7 @@ def create_app():
 
     # Endpoint to add finished sets (Conjuntos Prontos)
     @app.route('/add_conjuntos_prontos', methods=['POST'])
+    @cross_origin(origins=["https://daddyyyy9111.github.io", "http://localhost:5000", "http://127.0.0.1:5000"], supports_credentials=True)
     @token_required
     def add_conjuntos_prontos():
         if request.current_user_role not in ['producao', 'administrativo', 'admin', 'estoque_geral']:
@@ -554,6 +564,7 @@ def create_app():
 
     # Endpoint to get movements data
     @app.route('/movimentacoes', methods=['GET'])
+    @cross_origin(origins=["https://daddyyyy9111.github.io", "http://localhost:5000", "http://127.0.0.1:5000"], supports_credentials=True)
     @token_required
     def get_movimentacoes():
         if db:
@@ -570,13 +581,12 @@ def create_app():
             return jsonify([])
 
     # Rotas para Pedidos Pendentes
-    # Adicionado handler OPTIONS explícito para garantir 200 OK no preflight
     @app.route('/pedidos_pendentes', methods=['GET', 'POST', 'OPTIONS'])
+    @cross_origin(origins=["https://daddyyyy9111.github.io", "http://localhost:5000", "http://127.0.0.1:5000"], supports_credentials=True)
     @token_required # Re-ativado para GET e POST
     def pedidos_pendentes_handler():
         if request.method == 'OPTIONS':
             # Responde ao preflight OPTIONS com 200 OK e cabeçalhos CORS
-            # Flask-CORS já deveria fazer isso, mas adicionamos explicitamente como debug
             return '', 200
         
         # Se não for OPTIONS, continua com a lógica normal
@@ -650,7 +660,8 @@ def create_app():
             else:
                 return jsonify({"message": "Firestore não está configurado. Não é possível criar pedidos pendentes."}), 500
 
-    @app.route('/pedidos_pendentes/<order_id>', methods=['PUT', 'DELETE', 'OPTIONS']) # Adicionado OPTIONS
+    @app.route('/pedidos_pendentes/<order_id>', methods=['PUT', 'DELETE', 'OPTIONS'])
+    @cross_origin(origins=["https://daddyyyy9111.github.io", "http://localhost:5000", "http://127.0.0.1:5000"], supports_credentials=True)
     @token_required # Mantido para PUT e DELETE
     def pedidos_pendentes_id_handler(order_id):
         if request.method == 'OPTIONS':
@@ -711,6 +722,7 @@ def create_app():
 
     # Rota para Produção por CJA (para o Dashboard) - Agora aceita filtros e retorna dados por data
     @app.route('/production_summary', methods=['GET'])
+    @cross_origin(origins=["https://daddyyyy9111.github.io", "http://localhost:5000", "http://127.0.0.1:5000"], supports_credentials=True)
     @token_required
     def get_production_summary():
         if request.current_user_role not in ['producao', 'admin', 'estoque_geral', 'visualizador']:
