@@ -9,7 +9,9 @@ from functools import wraps
 import pytz # Importa pytz para lidar com fusos horários
 
 app = Flask(__name__)
-CORS(app, supports_credentials=True, resources={r"/*": {"origins": "*"}})
+# Configuração CORS: Permite requisições do seu frontend no GitHub Pages
+# Certifique-se de que a URL abaixo corresponda exatamente ao domínio do seu GitHub Pages
+CORS(app, supports_credentials=True, resources={r"/*": {"origins": ["https://daddyyyy9111.github.io", "http://localhost:5000", "http://127.0.0.1:5000"]}})
 
 # Define o fuso horário para consistência (ajuste se necessário)
 TIMEZONE = 'America/Sao_Paulo'
