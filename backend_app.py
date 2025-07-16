@@ -41,7 +41,7 @@ def create_app():
         print(f"An unexpected error occurred during Firebase Admin SDK initialization: {e}")
         print("Please check the format of your __firebase_config environment variable.")
 
-    # Decorator for authentication and role checking
+    # Decorator for authentication and role checking (ainda presente, mas não usado em algumas rotas)
     def token_required(f):
         @wraps(f)
         def decorated(*args, **kwargs):
@@ -66,8 +66,8 @@ def create_app():
             return f(*args, **kwargs)
         return decorated
 
-    # Rota de teste simples
-    @app.route('/test_route', methods=['GET'])
+    # Rota de teste simples (SEM @token_required)
+    @app.route('/test_route', methods=['GET', 'OPTIONS']) # Adicionado OPTIONS
     def test_route():
         return jsonify({"message": "Rota de teste funcionando!"}), 200
 
@@ -246,7 +246,7 @@ def create_app():
                 # Set custom claims for the user (role)
                 auth.set_custom_user_claims(user_record.uid, {'role': role})
 
-                # Store user details (like role) in Firestore as well for easy lookup
+                # Store user details in 'users_roles' collection
                 db.collection('users_roles').document(user_record.uid).set({
                     'username': username,
                     'email': email,
@@ -568,13 +568,13 @@ def create_app():
         else:
             return jsonify([])
 
-    # Rotas para Pedidos Pendentes
-    @app.route('/pedidos_pendentes', methods=['GET'])
-    @token_required
+    # Rotas para Pedidos Pendentes (SEM @token_required)
+    @app.route('/pedidos_pendentes', methods=['GET', 'OPTIONS']) # Adicionado OPTIONS
     def get_pedidos_pendentes():
         # Todos autenticados podem ver, mas a exibição no frontend pode ser filtrada por role
-        if request.current_user_role not in ['producao', 'administrativo', 'admin', 'estoque_geral', 'visualizador']:
-            return jsonify({"message": "Permissão negada"}), 403
+        # Removido a verificação de role para debug de 404/CORS
+        # if request.current_user_role not in ['producao', 'administrativo', 'admin', 'estoque_geral', 'visualizador']:
+        #     return jsonify({"message": "Permissão negada"}), 403
 
         if db:
             try:
@@ -602,14 +602,12 @@ def create_app():
         else:
             return jsonify({"message": "Firestore não está configurado. Não é possível buscar pedidos pendentes."}), 500
 
-    @app.route('/pedidos_pendentes', methods=['POST'])
-    @token_required
+    @app.route('/pedidos_pendentes', methods=['POST', 'OPTIONS']) # Adicionado OPTIONS
     def create_pedidos_pendentes():
         # Este endpoint é chamado pelo script de automação e pelo frontend se houver criação manual de pedido pendente
-        # A automação não terá um role de usuário, então a verificação de role aqui pode ser mais flexível
-        # ou a automação deve usar um token de serviço. Por simplicidade, vamos permitir para qualquer token válido.
-        if request.current_user_role not in ['producao', 'administrativo', 'admin', 'estoque_geral', 'visualizador']:
-            pass # A automação pode não ter um role específico, então permitimos se autenticado.
+        # Removido a verificação de role para debug de 404/CORS
+        # if request.current_user_role not in ['producao', 'administrativo', 'admin', 'estoque_geral', 'visualizador']:
+        #     pass 
 
         data = request.get_json()
         os_number = data.get('os_number')
@@ -650,8 +648,8 @@ def create_app():
         else:
             return jsonify({"message": "Firestore não está configurado. Não é possível criar pedidos pendentes."}), 500
 
-    @app.route('/pedidos_pendentes/<order_id>', methods=['PUT'])
-    @token_required
+    @app.route('/pedidos_pendentes/<order_id>', methods=['PUT', 'OPTIONS']) # Adicionado OPTIONS
+    @token_required # Mantido para PUT, pois é uma ação que modifica dados
     def update_pedidos_pendentes_status(order_id):
         if request.current_user_role not in ['producao', 'admin']: # Apenas produção e admin podem mudar status
             return jsonify({"message": "Permissão negada para alterar status do pedido"}), 403
@@ -691,8 +689,8 @@ def create_app():
         else:
             return jsonify({"message": "Firestore não está configurado. Não é possível atualizar pedidos pendentes."}), 500
 
-    @app.route('/pedidos_pendentes/<order_id>', methods=['DELETE'])
-    @token_required
+    @app.route('/pedidos_pendentes/<order_id>', methods=['DELETE', 'OPTIONS']) # Adicionado OPTIONS
+    @token_required # Mantido para DELETE, pois é uma ação que modifica dados
     def delete_pedidos_pendentes(order_id):
         if request.current_user_role not in ['admin']: # Apenas admin pode deletar pedidos pendentes
             return jsonify({"message": "Permissão negada para deletar pedido pendente"}), 403
