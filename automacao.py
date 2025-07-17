@@ -51,14 +51,11 @@ def fetch_new_emails(mail, processed_emails):
     """Busca novos e-mails com anexos PDF e retorna os caminhos dos PDFs baixados."""
     mail.select('inbox')
     
-    # --- LINHA DE BUSCA PARA DEPURAR ---
-    # Opção 1: Busca apenas e-mails não lidos com o assunto específico
-    # status, email_ids = mail.search(None, 'UNSEEN', 'SUBJECT', 'Pedido CJA') 
-    
-    # Opção 2 (PARA DEPURAR): Busca TODOS os e-mails com o assunto específico (lidos ou não)
-    # Use esta opção para verificar se o script consegue ver o e-mail, mesmo que lido.
-    status, email_ids = mail.search(None, 'SUBJECT', 'Pedido CJA') 
-    # --- FIM DA LINHA DE BUSCA PARA DEPURAR ---
+    # --- LINHA DE BUSCA CORRIGIDA ---
+    # Busca TODOS os e-mails com o assunto específico (lidos ou não) para depuração.
+    # Note as aspas duplas ao redor de "Pedido CJA"
+    status, email_ids = mail.search(None, 'SUBJECT', '"Pedido CJA"') 
+    # --- FIM DA LINHA DE BUSCA CORRIGIDA ---
 
     if status != 'OK':
         log(f"Erro ao buscar emails: {status}", "ERROR")

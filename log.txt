@@ -874,3 +874,10 @@ CONJUNTO ALUNO TAMANHO CJA-06 AZUL (TAMPO MDF)
 [2025-07-17 14:23:26] [INFO] Novos PDFs baixados neste ciclo: 0
 [2025-07-17 14:23:26] [INFO] Nenhum novo PDF para processar neste ciclo.
 [2025-07-17 14:23:26] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 14:31:30] [INFO] === Iniciando o automatizador de Pedidos ABC Móveis ===
+[2025-07-17 14:31:30] [INFO] Carregados 3 itens de pedido da lista de processados.
+[2025-07-17 14:31:30] [INFO] Token de autenticação Firebase obtido com sucesso.
+[2025-07-17 14:31:30] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 14:31:30] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 14:31:32] [INFO] Login IMAP bem-sucedido.
