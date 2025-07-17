@@ -376,3 +376,14 @@ CONJUNTO ALUNO TAMANHO CJA-06 AZUL (TAMPO MDF)
 [2025-07-16 13:41:54] [INFO] Conectando ao servidor IMAP: imap.gmail.com
 [2025-07-16 13:41:55] [INFO] Login IMAP bem-sucedido.
 [2025-07-16 13:41:56] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 11:45:20] [INFO] === Iniciando o automatizador de Pedidos ABC Móveis ===
+[2025-07-17 11:45:20] [INFO] Carregados 3 itens de pedido da lista de processados.
+[2025-07-17 11:45:20] [INFO] Obtendo novo token de autenticação para automacao@example.com...
+[2025-07-17 11:45:21] [ERROR] Erro ao obter token de autenticação Firebase: 400 Client Error: Bad Request for url: https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA0NNzu5Uuhoq1IYtiIz3QLJZAzywUwd9M
+[2025-07-17 11:45:21] [CRITICAL] Não foi possível obter o token de autenticação inicial. O script pode falhar ao enviar pedidos.
+[2025-07-17 11:45:21] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 11:45:21] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 11:45:21] [INFO] Conectando ao servidor IMAP: imap.gmail.com
+[2025-07-17 11:45:23] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 11:45:24] [INFO] Emails não lidos encontrados: 0
