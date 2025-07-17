@@ -51,21 +51,23 @@ def fetch_new_emails(mail, processed_emails):
     """Busca novos e-mails com anexos PDF e retorna os caminhos dos PDFs baixados."""
     mail.select('inbox')
     
-    # --- LINHA DE BUSCA CORRIGIDA ---
-    # Busca TODOS os e-mails com o assunto específico (lidos ou não) para depuração.
-    # Note as aspas duplas ao redor de "Pedido CJA"
-    status, email_ids = mail.search(None, 'SUBJECT', '"Pedido CJA"') 
-    # --- FIM DA LINHA DE BUSCA CORRIGIDA ---
+    # --- BUSCA MAIS ABRANGENTE PARA DEPURAR ---
+    # Busca todos os e-mails dos últimos 7 dias (ou um período que você queira testar)
+    # Isso é para garantir que estamos pegando e-mails e o problema não é a busca por assunto.
+    date_since = (datetime.now() - timedelta(days=7)).strftime("%d-%b-%Y")
+    status, email_ids = mail.search(None, 'SINCE', date_since)
+    # --- FIM DA BUSCA MAIS ABRANGENTE ---
 
     if status != 'OK':
         log(f"Erro ao buscar emails: {status}", "ERROR")
         return []
 
     email_id_list = email_ids[0].split()
-    
+    email_id_list.reverse() # Processar dos mais antigos para os mais novos
+
     new_pdfs = []
     
-    log(f"Emails encontrados (incluindo lidos, para depuração): {len(email_id_list)}", "INFO")
+    log(f"Emails encontrados nos últimos 7 dias (para depuração): {len(email_id_list)}", "INFO")
 
     for email_id in email_id_list:
         status, msg_data = mail.fetch(email_id, '(RFC822)')
@@ -78,19 +80,29 @@ def fetch_new_emails(mail, processed_emails):
                 msg = email.message_from_bytes(response_part[1])
                 
                 # Decodifica o assunto
-                subject, encoding = decode_header(msg['Subject'])[0]
-                if isinstance(subject, bytes):
-                    subject = subject.decode(encoding if encoding else 'utf-8')
+                subject_decoded, encoding = decode_header(msg['Subject'])[0]
+                if isinstance(subject_decoded, bytes):
+                    subject_decoded = subject_decoded.decode(encoding if encoding else 'utf-8')
+                
+                # Normaliza o assunto para comparação (remove espaços extras, torna minúsculas)
+                normalized_subject = subject_decoded.strip().lower()
+                expected_subject = "pedido cja".strip().lower()
 
-                log(f"Verificando email ID {email_id.decode()} com assunto: '{subject}'", "INFO")
+                log(f"Verificando email ID {email_id.decode()} - Assunto: '{subject_decoded}' (Normalizado: '{normalized_subject}')", "INFO")
+
+                # Verifica se o assunto corresponde ao esperado
+                if expected_subject not in normalized_subject:
+                    log(f"Email ID {email_id.decode()} (Assunto: '{subject_decoded}') não corresponde ao assunto esperado. Pulando.", "INFO")
+                    continue
 
                 # Verifica se o e-mail já foi processado
                 if email_id.decode() in processed_emails:
-                    log(f"Email ID {email_id.decode()} (Assunto: {subject}) já foi processado. Pulando.", "INFO")
+                    log(f"Email ID {email_id.decode()} (Assunto: {subject_decoded}) já foi processado. Pulando.", "INFO")
                     continue
 
-                log(f"Processando email: {subject}", "INFO")
+                log(f"Processando email: {subject_decoded}", "INFO")
 
+                has_pdf_attachment = False
                 for part in msg.walk():
                     if part.get_content_maintype() == 'multipart':
                         continue
@@ -98,14 +110,21 @@ def fetch_new_emails(mail, processed_emails):
                         continue
 
                     filename = part.get_filename()
-                    if filename and filename.endswith('.pdf'):
+                    if filename and filename.lower().endswith('.pdf'): # Verifica a extensão do arquivo
                         filepath = os.path.join(PDF_FOLDER, filename)
                         os.makedirs(PDF_FOLDER, exist_ok=True)
                         with open(filepath, 'wb') as f:
                             f.write(part.get_payload(decode=True))
                         log(f"PDF baixado: {filepath}", "INFO")
                         new_pdfs.append(filepath)
-                        processed_emails.add(email_id.decode()) # Adiciona o ID do e-mail à lista de processados
+                        has_pdf_attachment = True
+                        break # Baixa apenas o primeiro PDF encontrado por email
+
+                if has_pdf_attachment:
+                    processed_emails.add(email_id.decode()) # Adiciona o ID do e-mail à lista de processados
+                else:
+                    log(f"Email ID {email_id.decode()} (Assunto: {subject_decoded}) não contém anexo PDF. Pulando.", "INFO")
+
     return new_pdfs
 
 # --- Funções de Extração de PDF ---
