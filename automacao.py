@@ -1,5 +1,5 @@
 import imaplib
-import email
+import email # Importa o módulo email completo
 from email.header import decode_header
 import os
 import re
@@ -77,7 +77,8 @@ def fetch_new_emails(mail, processed_emails):
 
         for response_part in msg_data:
             if isinstance(response_part, tuple):
-                msg = email.message.from_bytes(response_part[1])
+                # --- CORREÇÃO AQUI: email.message_from_bytes() ---
+                msg = email.message_from_bytes(response_part[1])
                 
                 # Decodifica o assunto
                 subject_decoded, encoding = decode_header(msg['Subject'])[0]
@@ -169,13 +170,12 @@ def extract_info_from_pdf(pdf_path):
         cidade_destino = cidade_destino_match.group(1).strip() if cidade_destino_match else "N/A"
         log(f"DEBUG: Cidade de Destino extraída: {cidade_destino}", "DEBUG")
 
-        # --- NOVO REGEX PARA ITENS DE PRODUTO (Aplicado ao texto completo) ---
-        # Ajustado para o formato do PDF: "50 CONJUNTO ALUNO TAMANHO CJA-06 AZUL (TAMPO MDF)"
+        # --- REGEX PARA ITENS DE PRODUTO (Aplicado ao texto completo) ---
         item_pattern = re.compile(
             r'(\d+)\s+' # Quantidade (Grupo 1) - permite espaços e quebras de linha
             r'(?:CONJUNTO\s+ALUNO\s+TAMANHO\s+)?' # Texto opcional "CONJUNTO ALUNO TAMANHO "
             r'(CJA-\d{2})' # Modelo CJA (Grupo 2)
-            r'[^(\n]*?' # Qualquer coisa que não seja '(' ou quebra de linha (non-greedy)
+            r'.*?' # Qualquer coisa no meio (non-greedy)
             r'\(TAMPO\s+(MDF|PLASTICO|MASTICMOL)\)' # Tipo de Tampo (Grupo 3)
             , re.IGNORECASE | re.VERBOSE | re.DOTALL # re.DOTALL para que '.' inclua quebras de linha
         )
