@@ -21,7 +21,7 @@ PROCESSED_LIST_FILE = 'processed_emails.json'
 # --- Configuração da API do Backend ---
 # URL base do seu backend no Render.com
 # ATENÇÃO: SUBSTITUA ESTA URL PELA URL REAL DO SEU SERVIÇO DE BACKEND NO RENDER.COM
-API_BACKEND_URL = 'COLOQUE_AQUI_A_URL_DO_SEU_BACKEND_NO_RENDER' # <--- ATUALIZE ESTA URL!
+API_BACKEND_URL = 'https://estoque-abc-frontend.onrender.com' # <--- ATUALIZE ESTA URL!
 
 # --- Funções de Log ---
 def log(msg: str, level: str = "INFO"):

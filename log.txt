@@ -406,3 +406,77 @@ CONJUNTO ALUNO TAMANHO CJA-06 AZUL (TAMPO MDF)
 [2025-07-17 16:26:00] [INFO] Iniciando busca por novos emails e PDFs...
 [2025-07-17 16:26:02] [INFO] Login IMAP bem-sucedido.
 [2025-07-17 16:26:03] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 1
+[2025-07-17 16:39:38] [INFO] === Iniciando o automatizador de Pedidos ABC Móveis ===
+[2025-07-17 16:39:38] [INFO] Carregados 2 itens de pedido da lista de processados.
+[2025-07-17 16:39:38] [INFO] Token de autenticação Firebase obtido com sucesso.
+[2025-07-17 16:39:38] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:39:38] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:39:49] [INFO] === Iniciando o automatizador de Pedidos ABC Móveis ===
+[2025-07-17 16:39:49] [INFO] Carregados 2 itens de pedido da lista de processados.
+[2025-07-17 16:39:49] [INFO] Token de autenticação Firebase obtido com sucesso.
+[2025-07-17 16:39:49] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:39:49] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:39:51] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:39:52] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 1
+[2025-07-17 16:39:53] [INFO] Verificando email ID 244 - Assunto: 'OS 5611 - MUNICIPIO DE CUNHATAÍ/SC' (Normalizado: 'os 5611 - municipio de cunhataí/sc')
+[2025-07-17 16:39:53] [INFO] Processando email: OS 5611 - MUNICIPIO DE CUNHATAÍ/SC
+[2025-07-17 16:39:53] [INFO] Anexo PDF 'OS 5611 - PLANO DE CORTE - MUNICIPIO DE CUNHATAI.pdf' não contém 'PEDIDO' no nome. Pulando.
+[2025-07-17 16:39:53] [INFO] PDF 'PEDIDO' baixado: ./Pedidos_PDF\PEDIDO - MUNICIPIO DE CUNHATAI.pdf
+[2025-07-17 16:39:53] [INFO] Email ID 244 marcado como LIDO.
+[2025-07-17 16:39:53] [INFO] Novos PDFs baixados neste ciclo: 1
+[2025-07-17 16:39:53] [INFO] Iniciando extração de informações dos PDFs recém-baixados...
+[2025-07-17 16:39:53] [INFO] Texto extraído do PDF ./Pedidos_PDF\PEDIDO - MUNICIPIO DE CUNHATAI.pdf:
+---INÍCIO DO TEXTO---
+ 
+SF-007             
+Ordem de Serviço 
+Elaborado:     
+16/04/2014 
+Revisado: 
+15/12/2016 
+Revisão: 
+03 
+Setor: 
+Vendas / Compras / Produção 
+Responsável Pela Elaboração: 
+Vendas 
+Responsável Pela Revisão: 
+Direção 
+Responsável Pela Aprovação: 
+Direção 
+ 
+ 
+Sudeste Indústria e Comércio de Móveis Escolares Ltda 
+Rua Dr. Mário de Paiva, 612 sobreloja – Bairro Vila Nova – Poços de Caldas / MG - Telefone/Fax: (35) 3722-1837  
+E-mail: sudeste.moveis@gmail.com 
+ 
+CLIENTE: 
+MUNICIPIO DE CUNHATAI 
+OS: 5611 
+CIDADE: 
+CUNHATAI/SC 
+DATA DE EMISSÃO: 
+14/07/2025 
+DATA DA ENTREGA: 
+____/___/_____ 
+PRAZO DE ENTREGA:       13/08/2025 
+QTD 
+DESCRIÇÃO DO PRODUTO 
+02  
+CONJUNTO ALUNO TAMANHO CJA-05B VERDE (TAMPO PLASTICO) 
+ 
+
+---FIM DO TEXTO---
+[2025-07-17 16:39:53] [DEBUG] DEBUG: OS extraída: 5611
+[2025-07-17 16:39:53] [DEBUG] DEBUG: Data de Emissão extraída: 14/07/2025
+[2025-07-17 16:39:53] [DEBUG] DEBUG: Prazo de Entrega extraído: 13/08/2025
+[2025-07-17 16:39:53] [DEBUG] DEBUG: Cidade de Destino extraída: CUNHATAI/SC
+[2025-07-17 16:39:53] [DEBUG] DEBUG: Item extraído: Quantidade=2, Modelo CJA=CJA-05, Tampo=PLASTICO
+[2025-07-17 16:39:53] [DEBUG] DEBUG: Lista de itens extraídos antes do retorno: [{'tipo_cja': 'N/A', 'modelo_cja': 'CJA-05', 'tampo_tipo': 'PLASTICO', 'quantidade': 2, 'os_number': '5611', 'cidade_destino': 'CUNHATAI/SC', 'data_emissao': '14/07/2025', 'prazo_entrega': '13/08/2025'}]
+[2025-07-17 16:39:53] [INFO] Informações extraídas do PDF ./Pedidos_PDF\PEDIDO - MUNICIPIO DE CUNHATAI.pdf: OS=5611, Cidade=CUNHATAI/SC, Itens=1
+[2025-07-17 16:39:53] [INFO] Total de novos ITENS DE PEDIDO CJA extraídos dos PDFs baixados neste ciclo: 1
+[2025-07-17 16:39:53] [INFO] Enviando pedido OS 5611 para o backend...
+[2025-07-17 16:39:53] [ERROR] Erro inesperado ao enviar pedido OS 5611: Invalid URL 'COLOQUE_AQUI_A_URL_DO_SEU_BACKEND_NO_RENDER/pedidos_pendentes': No scheme supplied. Perhaps you meant https://COLOQUE_AQUI_A_URL_DO_SEU_BACKEND_NO_RENDER/pedidos_pendentes?
+[2025-07-17 16:39:53] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
