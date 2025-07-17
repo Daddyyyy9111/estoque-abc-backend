@@ -158,21 +158,21 @@ def extract_info_from_pdf(pdf_path):
         prazo_entrega = prazo_entrega_match.group(1) if prazo_entrega_match else "N/A"
         log(f"DEBUG: Prazo de Entrega extraído: {prazo_entrega}", "DEBUG")
 
-        # Regex para extrair Cidade de Destino (mais flexível)
-        cidade_destino_match = re.search(r'(?:CLIENTE|CIDADE DE DESTINO|CIDADE):\s*([A-Za-z\s\/]+)', text, re.IGNORECASE)
+        # --- NOVO REGEX PARA CIDADE DE DESTINO ---
+        # Procura especificamente por "CIDADE:" e captura o texto até a próxima quebra de linha ou "DATA DE EMISSÃO:"
+        cidade_destino_match = re.search(r'CIDADE:\s*([A-Za-z\s\/]+?)(?:\n|DATA DE EMISSÃO:)', text, re.IGNORECASE | re.DOTALL)
         cidade_destino = cidade_destino_match.group(1).strip() if cidade_destino_match else "N/A"
         log(f"DEBUG: Cidade de Destino extraída: {cidade_destino}", "DEBUG")
 
-        # Regex para extrair itens de pedido (Modelo CJA, Tipo de Tampo, Quantidade)
-        # Ajustado para o formato do PDF: "50 CONJUNTO ALUNO TAMANHO CJA-06 AZUL (TAMPO MDF)"
-        # Captura: Quantidade, Modelo CJA, Tipo de Tampo
-        # O tipo CJA (ZURICH/MASTICMOL) não está explicitamente na linha do item, então será 'N/A' por padrão.
+        # --- NOVO REGEX PARA ITENS DE PRODUTO ---
+        # Ajustado para o formato do PDF: "38 CONJUNTO ALUNO TAMANHO CJA-06 AZUL (TAMPO MDF)"
         item_pattern = re.compile(
-            r'(\d+)\s+' # Quantidade no início da linha (grupo 1)
+            r'(\d+)\s+' # Quantidade (Grupo 1)
             r'(?:CONJUNTO\s+ALUNO\s+TAMANHO\s+)?' # Texto opcional "CONJUNTO ALUNO TAMANHO "
-            r'(CJA-\d{2})\s+' # Modelo CJA (grupo 2)
-            r'.*?' # Qualquer coisa no meio (ex: AZUL)
-            r'\(TAMPO\s+(MDF|PLASTICO|MASTICMOL)\)' # Tipo de Tampo dentro de (TAMPO ...) (grupo 3)
+            r'(CJA-\d{2})' # Modelo CJA (Grupo 2)
+            r'\s* # Zero ou mais espaços
+            (?:[A-Za-z]+\s*)? # Opcional cor (ex: AZUL) seguido de espaço
+            r'\(TAMPO\s+(MDF|PLASTICO|MASTICMOL)\)' # Tipo de Tampo (Grupo 3)
             , re.IGNORECASE | re.VERBOSE
         )
         

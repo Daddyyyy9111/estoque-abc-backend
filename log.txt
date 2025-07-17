@@ -1,0 +1,93 @@
+[2025-07-17 15:45:19] [INFO] === Iniciando o automatizador de Pedidos ABC Móveis ===
+[2025-07-17 15:45:19] [INFO] Carregados 0 itens de pedido da lista de processados.
+[2025-07-17 15:45:20] [INFO] Token de autenticação Firebase obtido com sucesso.
+[2025-07-17 15:45:20] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 15:45:20] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 15:45:22] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 15:45:23] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 15:45:23] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 15:45:23] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 15:45:23] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 15:45:33] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 15:45:33] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 15:45:35] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 15:45:35] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 1
+[2025-07-17 15:45:36] [INFO] Verificando email ID 248 - Assunto: 'OS 5613 - MUNICIPIO DE CANOINHAS/SC' (Normalizado: 'os 5613 - municipio de canoinhas/sc')
+[2025-07-17 15:45:36] [INFO] Processando email: OS 5613 - MUNICIPIO DE CANOINHAS/SC
+[2025-07-17 15:45:36] [INFO] PDF baixado: ./Pedidos_PDF\PEDIDO - MUNICIPIO DE CANOINHAS.pdf
+[2025-07-17 15:45:37] [INFO] Email ID 248 marcado como LIDO.
+[2025-07-17 15:45:37] [INFO] Novos PDFs baixados neste ciclo: 1
+[2025-07-17 15:45:37] [INFO] Iniciando extração de informações dos PDFs recém-baixados...
+[2025-07-17 15:45:37] [INFO] Texto extraído do PDF ./Pedidos_PDF\PEDIDO - MUNICIPIO DE CANOINHAS.pdf:
+---INÍCIO DO TEXTO---
+ 
+SF-007             
+Ordem de Serviço 
+Elaborado:     
+16/04/2014 
+Revisado: 
+15/12/2016 
+Revisão: 
+03 
+Setor: 
+Vendas / Compras / Produção 
+Responsável Pela Elaboração: 
+Vendas 
+Responsável Pela Revisão: 
+Direção 
+Responsável Pela Aprovação: 
+Direção 
+ 
+ 
+Sudeste Indústria e Comércio de Móveis Escolares Ltda 
+Rua Dr. Mário de Paiva, 612 sobreloja – Bairro Vila Nova – Poços de Caldas / MG - Telefone/Fax: (35) 3722-1837  
+E-mail: sudeste.moveis@gmail.com 
+ 
+CLIENTE: 
+MUNICIPIO DE CANOINHAS 
+OS: 5613 
+CIDADE: 
+CANOINHAS/SC 
+DATA DE EMISSÃO: 
+15/07/2025 
+DATA DA ENTREGA: 
+____/___/_____ 
+PRAZO DE ENTREGA:       14/08/2025 
+QTD 
+DESCRIÇÃO DO PRODUTO 
+38 
+CONJUNTO ALUNO TAMANHO CJA-06 AZUL (TAMPO MDF) 
+ 
+
+---FIM DO TEXTO---
+[2025-07-17 15:45:37] [DEBUG] DEBUG: OS extraída: 5613
+[2025-07-17 15:45:37] [DEBUG] DEBUG: Data de Emissão extraída: 15/07/2025
+[2025-07-17 15:45:37] [DEBUG] DEBUG: Prazo de Entrega extraído: 14/08/2025
+[2025-07-17 15:45:37] [DEBUG] DEBUG: Cidade de Destino extraída: MUNICIPIO DE CANOINHAS 
+OS
+[2025-07-17 15:45:37] [INFO] Informações extraídas do PDF ./Pedidos_PDF\PEDIDO - MUNICIPIO DE CANOINHAS.pdf: OS=5613, Cidade=MUNICIPIO DE CANOINHAS 
+OS, Itens=0
+[2025-07-17 15:45:37] [INFO] Total de novos ITENS DE PEDIDO CJA extraídos dos PDFs baixados neste ciclo: 0
+[2025-07-17 15:45:37] [INFO] Nenhum dado para enviar para o backend.
+[2025-07-17 15:45:37] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 15:45:47] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 15:45:47] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 15:45:49] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 15:45:50] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 15:45:50] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 15:45:50] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 15:45:50] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 15:46:00] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 15:46:00] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 15:46:02] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 15:46:02] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 15:46:02] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 15:46:02] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 15:46:02] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 15:46:12] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 15:46:12] [INFO] Iniciando busca por novos emails e PDFs...
