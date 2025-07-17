@@ -110,23 +110,29 @@ def fetch_new_emails(mail, processed_emails):
                         continue
 
                     filename = part.get_filename()
-                    if filename and filename.lower().endswith('.pdf'): # Verifica a extensão do arquivo
-                        filepath = os.path.join(PDF_FOLDER, filename)
-                        os.makedirs(PDF_FOLDER, exist_ok=True)
-                        with open(filepath, 'wb') as f:
-                            f.write(part.get_payload(decode=True))
-                        log(f"PDF baixado: {filepath}", "INFO")
-                        new_pdfs.append(filepath)
-                        has_pdf_attachment = True
-                        break # Baixa apenas o primeiro PDF encontrado por email
-
+                    if filename and filename.lower().endswith('.pdf'):
+                        # --- NOVA VERIFICAÇÃO: FILTRAR POR NOMES DE PDF QUE CONTÊM "PEDIDO" ---
+                        if "pedido" in filename.lower():
+                            filepath = os.path.join(PDF_FOLDER, filename)
+                            os.makedirs(PDF_FOLDER, exist_ok=True)
+                            with open(filepath, 'wb') as f:
+                                f.write(part.get_payload(decode=True))
+                            log(f"PDF 'PEDIDO' baixado: {filepath}", "INFO")
+                            new_pdfs.append(filepath)
+                            has_pdf_attachment = True
+                            break # Baixa apenas o primeiro PDF "PEDIDO" encontrado por email
+                        else:
+                            log(f"Anexo PDF '{filename}' não contém 'PEDIDO' no nome. Pulando.", "INFO")
+                    else:
+                        log(f"Anexo '{filename}' não é um PDF ou não tem nome. Pulando.", "DEBUG") # Mudei para DEBUG
+                            
                 if has_pdf_attachment:
                     processed_emails.add(email_id.decode()) # Adiciona o ID do e-mail à lista de processados
                     # --- MARCA O E-MAIL COMO LIDO NO SERVIDOR IMAP ---
                     mail.store(email_id, '+FLAGS', '\\Seen')
                     log(f"Email ID {email_id.decode()} marcado como LIDO.", "INFO")
                 else:
-                    log(f"Email ID {email_id.decode()} (Assunto: {subject_decoded}) não contém anexo PDF. Pulando.", "INFO")
+                    log(f"Email ID {email_id.decode()} (Assunto: {subject_decoded}) não contém anexo PDF 'PEDIDO'. Pulando.", "INFO")
 
     return new_pdfs
 
@@ -163,24 +169,21 @@ def extract_info_from_pdf(pdf_path):
         cidade_destino = cidade_destino_match.group(1).strip() if cidade_destino_match else "N/A"
         log(f"DEBUG: Cidade de Destino extraída: {cidade_destino}", "DEBUG")
 
-        # --- NOVO REGEX PARA ITENS DE PRODUTO (Simplificado para depuração) ---
-        # Tenta capturar a quantidade, CJA-XX e o tipo de tampo.
-        # Removi a parte opcional "CONJUNTO ALUNO TAMANHO" e a cor para simplificar.
-        # A ideia é ver se o núcleo da captura funciona.
+        # --- REGEX PARA ITENS DE PRODUTO (Mantido o último, que é o mais provável para o PDF de PEDIDO) ---
         item_pattern = re.compile(
             r'(\d+)\s+' # Quantidade (Grupo 1)
-            r'.*?' # Qualquer coisa no meio (non-greedy)
-            r'(CJA-\d{2})\s+' # Modelo CJA (Grupo 2)
+            r'(?:CONJUNTO\s+ALUNO\s+TAMANHO\s+)?' # Texto opcional "CONJUNTO ALUNO TAMANHO "
+            r'(CJA-\d{2})' # Modelo CJA (Grupo 2)
             r'.*?' # Qualquer coisa no meio (non-greedy)
             r'\(TAMPO\s+(MDF|PLASTICO|MASTICMOL)\)' # Tipo de Tampo (Grupo 3)
-            , re.IGNORECASE | re.DOTALL # re.DOTALL é importante para o .*? se a descrição puder ter quebra de linha
+            , re.IGNORECASE | re.DOTALL # re.DOTALL para que '.' inclua quebras de linha
         )
         
         for line in text.split('\n'):
             line_stripped = line.strip() # Remove espaços em branco do início e fim da linha
             if not line_stripped: # Pula linhas vazias
                 continue
-            log(f"DEBUG: Tentando extrair item da linha: '{line_stripped}'", "DEBUG") # Log da linha sendo verificada
+            log(f"DEBUG: Tentando extrair item da linha: '{line_stripped}'", "DEBUG") 
             item_match = item_pattern.search(line_stripped)
             if item_match:
                 quantidade = int(item_match.group(1))
@@ -200,7 +203,7 @@ def extract_info_from_pdf(pdf_path):
                 })
                 log(f"DEBUG: Item extraído: Quantidade={quantidade}, Modelo CJA={modelo_cja}, Tampo={tampo_tipo}", "DEBUG")
         
-        log(f"DEBUG: Lista de itens extraídos antes do retorno: {extracted_items}", "DEBUG") # Log da lista final
+        log(f"DEBUG: Lista de itens extraídos antes do retorno: {extracted_items}", "DEBUG") 
         log(f"Informações extraídas do PDF {pdf_path}: OS={os_number}, Cidade={cidade_destino}, Itens={len(extracted_items)}", "INFO")
     except Exception as e:
         log(f"Erro ao extrair informações do PDF {pdf_path}: {e}", "ERROR")
