@@ -77,7 +77,7 @@ def fetch_new_emails(mail, processed_emails):
 
         for response_part in msg_data:
             if isinstance(response_part, tuple):
-                msg = email.message_from_bytes(response_part[1])
+                msg = email.message.from_bytes(response_part[1])
                 
                 # Decodifica o assunto
                 subject_decoded, encoding = decode_header(msg['Subject'])[0]
@@ -111,7 +111,7 @@ def fetch_new_emails(mail, processed_emails):
 
                     filename = part.get_filename()
                     if filename and filename.lower().endswith('.pdf'):
-                        # --- NOVA VERIFICAÇÃO: FILTRAR POR NOMES DE PDF QUE CONTÊM "PEDIDO" ---
+                        # --- VERIFICAÇÃO: FILTRAR POR NOMES DE PDF QUE CONTÊM "PEDIDO" ---
                         if "pedido" in filename.lower():
                             filepath = os.path.join(PDF_FOLDER, filename)
                             os.makedirs(PDF_FOLDER, exist_ok=True)
@@ -124,7 +124,7 @@ def fetch_new_emails(mail, processed_emails):
                         else:
                             log(f"Anexo PDF '{filename}' não contém 'PEDIDO' no nome. Pulando.", "INFO")
                     else:
-                        log(f"Anexo '{filename}' não é um PDF ou não tem nome. Pulando.", "DEBUG") # Mudei para DEBUG
+                        log(f"Anexo '{filename}' não é um PDF ou não tem nome. Pulando.", "DEBUG")
                             
                 if has_pdf_attachment:
                     processed_emails.add(email_id.decode()) # Adiciona o ID do e-mail à lista de processados
@@ -169,39 +169,35 @@ def extract_info_from_pdf(pdf_path):
         cidade_destino = cidade_destino_match.group(1).strip() if cidade_destino_match else "N/A"
         log(f"DEBUG: Cidade de Destino extraída: {cidade_destino}", "DEBUG")
 
-        # --- REGEX PARA ITENS DE PRODUTO (Mantido o último, que é o mais provável para o PDF de PEDIDO) ---
+        # --- NOVO REGEX PARA ITENS DE PRODUTO (Aplicado ao texto completo) ---
+        # Ajustado para o formato do PDF: "50 CONJUNTO ALUNO TAMANHO CJA-06 AZUL (TAMPO MDF)"
         item_pattern = re.compile(
-            r'(\d+)\s+' # Quantidade (Grupo 1)
+            r'(\d+)\s+' # Quantidade (Grupo 1) - permite espaços e quebras de linha
             r'(?:CONJUNTO\s+ALUNO\s+TAMANHO\s+)?' # Texto opcional "CONJUNTO ALUNO TAMANHO "
             r'(CJA-\d{2})' # Modelo CJA (Grupo 2)
-            r'.*?' # Qualquer coisa no meio (non-greedy)
+            r'[^(\n]*?' # Qualquer coisa que não seja '(' ou quebra de linha (non-greedy)
             r'\(TAMPO\s+(MDF|PLASTICO|MASTICMOL)\)' # Tipo de Tampo (Grupo 3)
-            , re.IGNORECASE | re.DOTALL # re.DOTALL para que '.' inclua quebras de linha
+            , re.IGNORECASE | re.VERBOSE | re.DOTALL # re.DOTALL para que '.' inclua quebras de linha
         )
         
-        for line in text.split('\n'):
-            line_stripped = line.strip() # Remove espaços em branco do início e fim da linha
-            if not line_stripped: # Pula linhas vazias
-                continue
-            log(f"DEBUG: Tentando extrair item da linha: '{line_stripped}'", "DEBUG") 
-            item_match = item_pattern.search(line_stripped)
-            if item_match:
-                quantidade = int(item_match.group(1))
-                modelo_cja = item_match.group(2).upper()
-                tampo_tipo = item_match.group(3).upper()
-                tipo_cja = "N/A" # Definido como N/A pois não está no padrão da linha do item neste PDF
+        # Iterar sobre todas as correspondências encontradas no texto completo
+        for item_match in item_pattern.finditer(text):
+            quantidade = int(item_match.group(1))
+            modelo_cja = item_match.group(2).upper()
+            tampo_tipo = item_match.group(3).upper()
+            tipo_cja = "N/A" # Definido como N/A pois não está no padrão da linha do item neste PDF
 
-                extracted_items.append({
-                    "tipo_cja": tipo_cja,
-                    "modelo_cja": modelo_cja,
-                    "tampo_tipo": tampo_tipo,
-                    "quantidade": quantidade,
-                    "os_number": os_number, 
-                    "cidade_destino": cidade_destino, 
-                    "data_emissao": data_emissao,
-                    "prazo_entrega": prazo_entrega
-                })
-                log(f"DEBUG: Item extraído: Quantidade={quantidade}, Modelo CJA={modelo_cja}, Tampo={tampo_tipo}", "DEBUG")
+            extracted_items.append({
+                "tipo_cja": tipo_cja,
+                "modelo_cja": modelo_cja,
+                "tampo_tipo": tampo_tipo,
+                "quantidade": quantidade,
+                "os_number": os_number, 
+                "cidade_destino": cidade_destino, 
+                "data_emissao": data_emissao,
+                "prazo_entrega": prazo_entrega
+            })
+            log(f"DEBUG: Item extraído: Quantidade={quantidade}, Modelo CJA={modelo_cja}, Tampo={tampo_tipo}", "DEBUG")
         
         log(f"DEBUG: Lista de itens extraídos antes do retorno: {extracted_items}", "DEBUG") 
         log(f"Informações extraídas do PDF {pdf_path}: OS={os_number}, Cidade={cidade_destino}, Itens={len(extracted_items)}", "INFO")

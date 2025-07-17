@@ -300,3 +300,101 @@ PEÇAS POR TUBO
 [2025-07-17 16:15:05] [INFO] Total de novos ITENS DE PEDIDO CJA extraídos dos PDFs baixados neste ciclo: 0
 [2025-07-17 16:15:05] [INFO] Nenhum dado para enviar para o backend.
 [2025-07-17 16:15:05] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:19:57] [INFO] === Iniciando o automatizador de Pedidos ABC Móveis ===
+[2025-07-17 16:19:57] [INFO] Carregados 1 itens de pedido da lista de processados.
+[2025-07-17 16:19:57] [INFO] Token de autenticação Firebase obtido com sucesso.
+[2025-07-17 16:19:57] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:19:57] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:19:59] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:20:00] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 1
+[2025-07-17 16:20:01] [INFO] Verificando email ID 249 - Assunto: 'OS 5614 - MUNICIPIO DE IRATI/SC' (Normalizado: 'os 5614 - municipio de irati/sc')
+[2025-07-17 16:20:01] [INFO] Processando email: OS 5614 - MUNICIPIO DE IRATI/SC
+[2025-07-17 16:20:01] [INFO] PDF 'PEDIDO' baixado: ./Pedidos_PDF\PEDIDO - MUNICIPIO DE IRATI.pdf
+[2025-07-17 16:20:01] [INFO] Email ID 249 marcado como LIDO.
+[2025-07-17 16:20:01] [INFO] Novos PDFs baixados neste ciclo: 1
+[2025-07-17 16:20:01] [INFO] Iniciando extração de informações dos PDFs recém-baixados...
+[2025-07-17 16:20:01] [INFO] Texto extraído do PDF ./Pedidos_PDF\PEDIDO - MUNICIPIO DE IRATI.pdf:
+---INÍCIO DO TEXTO---
+ 
+SF-007             
+Ordem de Serviço 
+Elaborado:     
+16/04/2014 
+Revisado: 
+15/12/2016 
+Revisão: 
+03 
+Setor: 
+Vendas / Compras / Produção 
+Responsável Pela Elaboração: 
+Vendas 
+Responsável Pela Revisão: 
+Direção 
+Responsável Pela Aprovação: 
+Direção 
+ 
+ 
+Sudeste Indústria e Comércio de Móveis Escolares Ltda 
+Rua Dr. Mário de Paiva, 612 sobreloja – Bairro Vila Nova – Poços de Caldas / MG - Telefone/Fax: (35) 3722-1837  
+E-mail: sudeste.moveis@gmail.com 
+ 
+CLIENTE: 
+MUNICIPIO DE IRATI 
+OS: 5614 
+CIDADE: 
+IRATI/SC 
+DATA DE EMISSÃO: 
+15/07/2025 
+DATA DA ENTREGA: 
+____/___/_____ 
+PRAZO DE ENTREGA:       14/08/2025 
+QTD 
+DESCRIÇÃO DO PRODUTO 
+50 
+CONJUNTO ALUNO TAMANHO CJA-06 AZUL (TAMPO MDF) 
+ 
+
+---FIM DO TEXTO---
+[2025-07-17 16:20:01] [DEBUG] DEBUG: OS extraída: 5614
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Data de Emissão extraída: 15/07/2025
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Prazo de Entrega extraído: 14/08/2025
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Cidade de Destino extraída: IRATI/SC
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Tentando extrair item da linha: 'SF-007'
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Tentando extrair item da linha: 'Ordem de Serviço'
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Tentando extrair item da linha: 'Elaborado:'
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Tentando extrair item da linha: '16/04/2014'
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Tentando extrair item da linha: 'Revisado:'
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Tentando extrair item da linha: '15/12/2016'
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Tentando extrair item da linha: 'Revisão:'
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Tentando extrair item da linha: '03'
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Tentando extrair item da linha: 'Setor:'
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Tentando extrair item da linha: 'Vendas / Compras / Produção'
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Tentando extrair item da linha: 'Responsável Pela Elaboração:'
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Tentando extrair item da linha: 'Vendas'
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Tentando extrair item da linha: 'Responsável Pela Revisão:'
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Tentando extrair item da linha: 'Direção'
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Tentando extrair item da linha: 'Responsável Pela Aprovação:'
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Tentando extrair item da linha: 'Direção'
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Tentando extrair item da linha: 'Sudeste Indústria e Comércio de Móveis Escolares Ltda'
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Tentando extrair item da linha: 'Rua Dr. Mário de Paiva, 612 sobreloja – Bairro Vila Nova – Poços de Caldas / MG - Telefone/Fax: (35) 3722-1837'
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Tentando extrair item da linha: 'E-mail: sudeste.moveis@gmail.com'
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Tentando extrair item da linha: 'CLIENTE:'
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Tentando extrair item da linha: 'MUNICIPIO DE IRATI'
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Tentando extrair item da linha: 'OS: 5614'
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Tentando extrair item da linha: 'CIDADE:'
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Tentando extrair item da linha: 'IRATI/SC'
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Tentando extrair item da linha: 'DATA DE EMISSÃO:'
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Tentando extrair item da linha: '15/07/2025'
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Tentando extrair item da linha: 'DATA DA ENTREGA:'
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Tentando extrair item da linha: '____/___/_____'
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Tentando extrair item da linha: 'PRAZO DE ENTREGA:       14/08/2025'
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Tentando extrair item da linha: 'QTD'
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Tentando extrair item da linha: 'DESCRIÇÃO DO PRODUTO'
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Tentando extrair item da linha: '50'
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Tentando extrair item da linha: 'CONJUNTO ALUNO TAMANHO CJA-06 AZUL (TAMPO MDF)'
+[2025-07-17 16:20:01] [DEBUG] DEBUG: Lista de itens extraídos antes do retorno: []
+[2025-07-17 16:20:01] [INFO] Informações extraídas do PDF ./Pedidos_PDF\PEDIDO - MUNICIPIO DE IRATI.pdf: OS=5614, Cidade=IRATI/SC, Itens=0
+[2025-07-17 16:20:01] [INFO] Total de novos ITENS DE PEDIDO CJA extraídos dos PDFs baixados neste ciclo: 0
+[2025-07-17 16:20:01] [INFO] Nenhum dado para enviar para o backend.
+[2025-07-17 16:20:01] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
