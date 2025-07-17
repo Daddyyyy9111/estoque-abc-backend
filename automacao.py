@@ -160,18 +160,20 @@ def extract_info_from_pdf(pdf_path):
 
         # --- NOVO REGEX PARA CIDADE DE DESTINO ---
         # Procura especificamente por "CIDADE:" e captura o texto até a próxima quebra de linha ou "DATA DE EMISSÃO:"
+        # Adicionado \s* antes do grupo de captura para lidar com espaços extras
         cidade_destino_match = re.search(r'CIDADE:\s*([A-Za-z\s\/]+?)(?:\n|DATA DE EMISSÃO:)', text, re.IGNORECASE | re.DOTALL)
         cidade_destino = cidade_destino_match.group(1).strip() if cidade_destino_match else "N/A"
         log(f"DEBUG: Cidade de Destino extraída: {cidade_destino}", "DEBUG")
 
         # --- NOVO REGEX PARA ITENS DE PRODUTO ---
         # Ajustado para o formato do PDF: "38 CONJUNTO ALUNO TAMANHO CJA-06 AZUL (TAMPO MDF)"
+        # Corrigido: Usando aspas triplas para string de múltiplas linhas
         item_pattern = re.compile(
             r'(\d+)\s+' # Quantidade (Grupo 1)
             r'(?:CONJUNTO\s+ALUNO\s+TAMANHO\s+)?' # Texto opcional "CONJUNTO ALUNO TAMANHO "
             r'(CJA-\d{2})' # Modelo CJA (Grupo 2)
-            r'\s* # Zero ou mais espaços
-            (?:[A-Za-z]+\s*)? # Opcional cor (ex: AZUL) seguido de espaço
+            r'\s*' # Zero ou mais espaços
+            r'(?:[A-Za-z]+\s*)?' # Opcional cor (ex: AZUL) seguido de espaço
             r'\(TAMPO\s+(MDF|PLASTICO|MASTICMOL)\)' # Tipo de Tampo (Grupo 3)
             , re.IGNORECASE | re.VERBOSE
         )
