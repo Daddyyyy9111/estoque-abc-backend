@@ -387,3 +387,462 @@ CONJUNTO ALUNO TAMANHO CJA-06 AZUL (TAMPO MDF)
 [2025-07-17 11:45:21] [INFO] Conectando ao servidor IMAP: imap.gmail.com
 [2025-07-17 11:45:23] [INFO] Login IMAP bem-sucedido.
 [2025-07-17 11:45:24] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:08:08] [INFO] === Iniciando o automatizador de Pedidos ABC Móveis ===
+[2025-07-17 13:08:08] [INFO] Carregados 3 itens de pedido da lista de processados.
+[2025-07-17 13:08:08] [INFO] Token de autenticação Firebase obtido com sucesso.
+[2025-07-17 13:08:08] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:08:08] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:08:11] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:08:12] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:08:12] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:08:12] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:08:12] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:08:22] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:08:22] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:08:24] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:08:25] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:08:25] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:08:25] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:08:25] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:08:35] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:08:35] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:08:37] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:08:37] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:08:37] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:08:37] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:08:37] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:08:47] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:08:47] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:08:49] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:08:50] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:08:50] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:08:50] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:08:50] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:09:00] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:09:00] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:09:02] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:09:03] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:09:03] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:09:03] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:09:03] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:09:13] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:09:13] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:09:14] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:09:15] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:09:15] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:09:15] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:09:15] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:09:25] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:09:25] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:09:27] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:09:28] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:09:28] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:09:28] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:09:28] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:09:38] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:09:38] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:09:39] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:09:40] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:09:40] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:09:40] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:09:40] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:09:50] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:09:50] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:09:51] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:09:52] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:09:52] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:09:52] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:09:52] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:10:02] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:10:02] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:10:03] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:10:04] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:10:04] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:10:04] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:10:04] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:10:14] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:10:14] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:10:16] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:10:17] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:10:17] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:10:17] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:10:17] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:10:27] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:10:27] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:10:29] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:10:29] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:10:29] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:10:29] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:10:29] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:10:39] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:10:39] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:10:42] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:10:42] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:10:42] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:10:42] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:10:42] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:10:52] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:10:52] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:10:54] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:10:55] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:10:55] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:10:55] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:10:55] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:11:05] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:11:05] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:11:06] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:11:07] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:11:07] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:11:07] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:11:07] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:11:17] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:11:17] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:11:19] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:11:20] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:11:20] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:11:20] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:11:20] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:11:30] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:11:30] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:11:32] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:11:32] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:11:32] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:11:32] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:11:32] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:11:42] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:11:42] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:11:44] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:11:45] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:11:45] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:11:45] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:11:45] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:11:55] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:11:55] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:11:57] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:11:58] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:11:58] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:11:58] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:11:58] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:12:08] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:12:08] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:12:09] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:12:10] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:12:10] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:12:10] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:12:10] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:12:20] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:12:20] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:12:22] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:12:23] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:12:23] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:12:23] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:12:23] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:12:33] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:12:33] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:12:35] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:12:36] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:12:36] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:12:36] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:12:36] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:12:46] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:12:46] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:12:48] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:12:48] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:12:48] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:12:48] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:12:48] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:12:58] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:12:58] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:13:00] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:13:01] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:13:01] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:13:01] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:13:01] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:13:11] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:13:11] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:13:13] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:13:14] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:13:14] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:13:14] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:13:14] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:13:24] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:13:24] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:13:26] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:13:26] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:13:26] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:13:26] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:13:26] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:13:36] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:13:36] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:13:38] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:13:39] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:13:39] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:13:39] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:13:39] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:13:49] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:13:49] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:13:51] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:13:52] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:13:52] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:13:52] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:13:52] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:14:02] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:14:02] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:14:03] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:14:04] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:14:04] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:14:04] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:14:04] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:14:14] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:14:14] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:14:16] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:14:17] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:14:17] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:14:17] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:14:17] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:14:27] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:14:27] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:14:29] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:14:30] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:14:30] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:14:30] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:14:30] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:14:40] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:14:40] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:14:41] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:14:42] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:14:42] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:14:42] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:14:42] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:14:52] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:14:52] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:14:54] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:14:55] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:14:55] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:14:55] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:14:55] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:15:05] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:15:05] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:15:07] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:15:07] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:15:07] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:15:07] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:15:07] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:15:17] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:15:17] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:15:20] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:15:21] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:15:21] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:15:21] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:15:21] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:15:31] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:15:31] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:15:33] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:15:34] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:15:34] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:15:34] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:15:34] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:15:44] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:15:44] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:15:45] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:15:46] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:15:46] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:15:46] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:15:46] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:15:56] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:15:56] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:15:58] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:15:59] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:15:59] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:15:59] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:15:59] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:16:09] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:16:09] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:16:11] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:16:11] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:16:11] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:16:11] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:16:11] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:16:21] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:16:21] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:16:23] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:16:24] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:16:24] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:16:24] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:16:24] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:16:34] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:16:34] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:16:35] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:16:36] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:16:36] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:16:36] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:16:36] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:16:46] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:16:46] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:16:48] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:16:49] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:16:49] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:16:49] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:16:49] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:16:59] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:16:59] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:17:01] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:17:01] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:17:01] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:17:01] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:17:01] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:17:11] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:17:11] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:17:14] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:17:14] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:17:14] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:17:14] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:17:14] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:17:24] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:17:24] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:17:26] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:17:27] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:17:27] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:17:27] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:17:27] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:17:37] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:17:37] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:17:39] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:17:40] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:17:40] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:17:40] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:17:40] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:17:50] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:17:50] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:17:52] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:17:52] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:17:52] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:17:52] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:17:52] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:18:02] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:18:02] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:18:04] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:18:05] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:18:05] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:18:05] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:18:05] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:18:15] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:18:15] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:18:17] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:18:18] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:18:18] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:18:18] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:18:18] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:18:28] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:18:28] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:18:30] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:18:31] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:18:31] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:18:31] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:18:31] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:18:41] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:18:41] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:18:43] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:18:43] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:18:43] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:18:43] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:18:43] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:18:53] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:18:53] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:18:55] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:18:55] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:18:55] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:18:55] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:18:55] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:19:05] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:19:05] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:19:07] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:19:08] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:19:08] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:19:08] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:19:08] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:19:18] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:19:18] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:19:20] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:19:21] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:19:21] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:19:21] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:19:21] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:19:31] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:19:31] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:19:32] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:19:33] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:19:33] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:19:33] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:19:33] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:19:43] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:19:43] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:19:45] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:19:45] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:19:45] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:19:45] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:19:45] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 13:19:55] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 13:19:55] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 13:19:57] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 13:19:58] [INFO] Emails não lidos encontrados: 0
+[2025-07-17 13:19:58] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 13:19:58] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 13:19:58] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
