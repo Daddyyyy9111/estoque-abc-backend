@@ -51,12 +51,9 @@ def fetch_new_emails(mail, processed_emails):
     """Busca novos e-mails com anexos PDF e retorna os caminhos dos PDFs baixados."""
     mail.select('inbox')
     
-    # --- BUSCA MAIS ABRANGENTE PARA DEPURAR ---
     # Busca todos os e-mails dos últimos 7 dias (ou um período que você queira testar)
-    # Isso é para garantir que estamos pegando e-mails e o problema não é a busca por assunto.
     date_since = (datetime.now() - timedelta(days=7)).strftime("%d-%b-%Y")
     status, email_ids = mail.search(None, 'SINCE', date_since)
-    # --- FIM DA BUSCA MAIS ABRANGENTE ---
 
     if status != 'OK':
         log(f"Erro ao buscar emails: {status}", "ERROR")
@@ -68,6 +65,11 @@ def fetch_new_emails(mail, processed_emails):
     new_pdfs = []
     
     log(f"Emails encontrados nos últimos 7 dias (para depuração): {len(email_id_list)}", "INFO")
+
+    # Regex para verificar se o assunto começa com "OS" seguido de um número
+    # ou contém "OS" seguido de um número em qualquer parte do assunto.
+    # Ex: "OS 1234 - Cliente", "Re: OS 5678", "Pedido com OS999"
+    os_subject_pattern = re.compile(r'os\s*\d+', re.IGNORECASE)
 
     for email_id in email_id_list:
         status, msg_data = mail.fetch(email_id, '(RFC822)')
@@ -86,14 +88,14 @@ def fetch_new_emails(mail, processed_emails):
                 
                 # Normaliza o assunto para comparação (remove espaços extras, torna minúsculas)
                 normalized_subject = subject_decoded.strip().lower()
-                expected_subject = "pedido cja".strip().lower()
 
                 log(f"Verificando email ID {email_id.decode()} - Assunto: '{subject_decoded}' (Normalizado: '{normalized_subject}')", "INFO")
 
-                # Verifica se o assunto corresponde ao esperado
-                if expected_subject not in normalized_subject:
-                    log(f"Email ID {email_id.decode()} (Assunto: '{subject_decoded}') não corresponde ao assunto esperado. Pulando.", "INFO")
+                # --- NOVA LÓGICA DE VERIFICAÇÃO DE ASSUNTO ---
+                if not os_subject_pattern.search(normalized_subject):
+                    log(f"Email ID {email_id.decode()} (Assunto: '{subject_decoded}') não corresponde ao padrão 'OS [número]'. Pulando.", "INFO")
                     continue
+                # --- FIM DA NOVA LÓGICA ---
 
                 # Verifica se o e-mail já foi processado
                 if email_id.decode() in processed_emails:
