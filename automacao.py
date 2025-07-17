@@ -158,28 +158,30 @@ def extract_info_from_pdf(pdf_path):
         prazo_entrega = prazo_entrega_match.group(1) if prazo_entrega_match else "N/A"
         log(f"DEBUG: Prazo de Entrega extraído: {prazo_entrega}", "DEBUG")
 
-        # --- NOVO REGEX PARA CIDADE DE DESTINO ---
-        # Procura especificamente por "CIDADE:" e captura o texto até a próxima quebra de linha ou "DATA DE EMISSÃO:"
-        # Adicionado \s* antes do grupo de captura para lidar com espaços extras
+        # Regex para extrair Cidade de Destino (mais flexível)
         cidade_destino_match = re.search(r'CIDADE:\s*([A-Za-z\s\/]+?)(?:\n|DATA DE EMISSÃO:)', text, re.IGNORECASE | re.DOTALL)
         cidade_destino = cidade_destino_match.group(1).strip() if cidade_destino_match else "N/A"
         log(f"DEBUG: Cidade de Destino extraída: {cidade_destino}", "DEBUG")
 
-        # --- NOVO REGEX PARA ITENS DE PRODUTO ---
-        # Ajustado para o formato do PDF: "38 CONJUNTO ALUNO TAMANHO CJA-06 AZUL (TAMPO MDF)"
-        # Corrigido: Usando aspas triplas para string de múltiplas linhas
+        # --- NOVO REGEX PARA ITENS DE PRODUTO (Simplificado para depuração) ---
+        # Tenta capturar a quantidade, CJA-XX e o tipo de tampo.
+        # Removi a parte opcional "CONJUNTO ALUNO TAMANHO" e a cor para simplificar.
+        # A ideia é ver se o núcleo da captura funciona.
         item_pattern = re.compile(
             r'(\d+)\s+' # Quantidade (Grupo 1)
-            r'(?:CONJUNTO\s+ALUNO\s+TAMANHO\s+)?' # Texto opcional "CONJUNTO ALUNO TAMANHO "
-            r'(CJA-\d{2})' # Modelo CJA (Grupo 2)
-            r'\s*' # Zero ou mais espaços
-            r'(?:[A-Za-z]+\s*)?' # Opcional cor (ex: AZUL) seguido de espaço
+            r'.*?' # Qualquer coisa no meio (non-greedy)
+            r'(CJA-\d{2})\s+' # Modelo CJA (Grupo 2)
+            r'.*?' # Qualquer coisa no meio (non-greedy)
             r'\(TAMPO\s+(MDF|PLASTICO|MASTICMOL)\)' # Tipo de Tampo (Grupo 3)
-            , re.IGNORECASE | re.VERBOSE
+            , re.IGNORECASE | re.DOTALL # re.DOTALL é importante para o .*? se a descrição puder ter quebra de linha
         )
         
         for line in text.split('\n'):
-            item_match = item_pattern.search(line)
+            line_stripped = line.strip() # Remove espaços em branco do início e fim da linha
+            if not line_stripped: # Pula linhas vazias
+                continue
+            log(f"DEBUG: Tentando extrair item da linha: '{line_stripped}'", "DEBUG") # Log da linha sendo verificada
+            item_match = item_pattern.search(line_stripped)
             if item_match:
                 quantidade = int(item_match.group(1))
                 modelo_cja = item_match.group(2).upper()
@@ -191,12 +193,14 @@ def extract_info_from_pdf(pdf_path):
                     "modelo_cja": modelo_cja,
                     "tampo_tipo": tampo_tipo,
                     "quantidade": quantidade,
-                    "os_number": os_number, # Repete a OS para cada item
-                    "cidade_destino": cidade_destino, # Repete a cidade para cada item
+                    "os_number": os_number, 
+                    "cidade_destino": cidade_destino, 
                     "data_emissao": data_emissao,
                     "prazo_entrega": prazo_entrega
                 })
                 log(f"DEBUG: Item extraído: Quantidade={quantidade}, Modelo CJA={modelo_cja}, Tampo={tampo_tipo}", "DEBUG")
+        
+        log(f"DEBUG: Lista de itens extraídos antes do retorno: {extracted_items}", "DEBUG") # Log da lista final
         log(f"Informações extraídas do PDF {pdf_path}: OS={os_number}, Cidade={cidade_destino}, Itens={len(extracted_items)}", "INFO")
     except Exception as e:
         log(f"Erro ao extrair informações do PDF {pdf_path}: {e}", "ERROR")

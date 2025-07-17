@@ -91,3 +91,414 @@ OS, Itens=0
 [2025-07-17 15:46:12] [INFO] 
 ==== Início do Ciclo de Verificação de Pedidos ====
 [2025-07-17 15:46:12] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 15:59:17] [INFO] === Iniciando o automatizador de Pedidos ABC Móveis ===
+[2025-07-17 15:59:17] [INFO] Carregados 1 itens de pedido da lista de processados.
+[2025-07-17 15:59:17] [INFO] Token de autenticação Firebase obtido com sucesso.
+[2025-07-17 15:59:17] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 15:59:17] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 15:59:19] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 15:59:20] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 15:59:20] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 15:59:20] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 15:59:20] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 15:59:30] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 15:59:30] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 15:59:32] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 15:59:33] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 1
+[2025-07-17 15:59:34] [INFO] Verificando email ID 249 - Assunto: 'OS 5614 - MUNICIPIO DE IRATI/SC' (Normalizado: 'os 5614 - municipio de irati/sc')
+[2025-07-17 15:59:34] [INFO] Processando email: OS 5614 - MUNICIPIO DE IRATI/SC
+[2025-07-17 15:59:34] [INFO] PDF baixado: ./Pedidos_PDF\PEDIDO - MUNICIPIO DE IRATI.pdf
+[2025-07-17 15:59:34] [INFO] Email ID 249 marcado como LIDO.
+[2025-07-17 15:59:34] [INFO] Novos PDFs baixados neste ciclo: 1
+[2025-07-17 15:59:34] [INFO] Iniciando extração de informações dos PDFs recém-baixados...
+[2025-07-17 15:59:35] [INFO] Texto extraído do PDF ./Pedidos_PDF\PEDIDO - MUNICIPIO DE IRATI.pdf:
+---INÍCIO DO TEXTO---
+ 
+SF-007             
+Ordem de Serviço 
+Elaborado:     
+16/04/2014 
+Revisado: 
+15/12/2016 
+Revisão: 
+03 
+Setor: 
+Vendas / Compras / Produção 
+Responsável Pela Elaboração: 
+Vendas 
+Responsável Pela Revisão: 
+Direção 
+Responsável Pela Aprovação: 
+Direção 
+ 
+ 
+Sudeste Indústria e Comércio de Móveis Escolares Ltda 
+Rua Dr. Mário de Paiva, 612 sobreloja – Bairro Vila Nova – Poços de Caldas / MG - Telefone/Fax: (35) 3722-1837  
+E-mail: sudeste.moveis@gmail.com 
+ 
+CLIENTE: 
+MUNICIPIO DE IRATI 
+OS: 5614 
+CIDADE: 
+IRATI/SC 
+DATA DE EMISSÃO: 
+15/07/2025 
+DATA DA ENTREGA: 
+____/___/_____ 
+PRAZO DE ENTREGA:       14/08/2025 
+QTD 
+DESCRIÇÃO DO PRODUTO 
+50 
+CONJUNTO ALUNO TAMANHO CJA-06 AZUL (TAMPO MDF) 
+ 
+
+---FIM DO TEXTO---
+[2025-07-17 15:59:35] [DEBUG] DEBUG: OS extraída: 5614
+[2025-07-17 15:59:35] [DEBUG] DEBUG: Data de Emissão extraída: 15/07/2025
+[2025-07-17 15:59:35] [DEBUG] DEBUG: Prazo de Entrega extraído: 14/08/2025
+[2025-07-17 15:59:35] [DEBUG] DEBUG: Cidade de Destino extraída: IRATI/SC
+[2025-07-17 15:59:35] [INFO] Informações extraídas do PDF ./Pedidos_PDF\PEDIDO - MUNICIPIO DE IRATI.pdf: OS=5614, Cidade=IRATI/SC, Itens=0
+[2025-07-17 15:59:35] [INFO] Total de novos ITENS DE PEDIDO CJA extraídos dos PDFs baixados neste ciclo: 0
+[2025-07-17 15:59:35] [INFO] Nenhum dado para enviar para o backend.
+[2025-07-17 15:59:35] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 15:59:45] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 15:59:45] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 15:59:46] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 15:59:47] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 15:59:47] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 15:59:47] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 15:59:47] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 15:59:57] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 15:59:57] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 15:59:58] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 15:59:59] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 15:59:59] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 15:59:59] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 15:59:59] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:00:09] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:00:09] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:00:11] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:00:12] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:00:12] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:00:12] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:00:12] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:00:22] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:00:22] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:00:24] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:00:24] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:00:24] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:00:24] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:00:24] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:00:34] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:00:34] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:00:36] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:00:37] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:00:37] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:00:37] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:00:37] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:00:47] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:00:47] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:00:49] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:00:50] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:00:50] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:00:50] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:00:50] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:01:00] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:01:00] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:01:02] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:01:02] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:01:02] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:01:02] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:01:02] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:01:12] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:01:12] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:01:14] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:01:15] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:01:15] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:01:15] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:01:15] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:01:25] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:01:25] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:01:27] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:01:28] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:01:28] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:01:28] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:01:28] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:01:38] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:01:38] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:01:40] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:01:40] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:01:40] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:01:40] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:01:40] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:01:50] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:01:50] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:01:52] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:01:53] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:01:53] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:01:53] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:01:53] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:02:03] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:02:03] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:02:05] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:02:06] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:02:06] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:02:06] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:02:06] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:02:16] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:02:16] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:02:18] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:02:18] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:02:18] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:02:18] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:02:18] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:02:28] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:02:28] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:02:30] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:02:31] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:02:31] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:02:31] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:02:31] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:02:41] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:02:41] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:02:43] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:02:44] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:02:44] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:02:44] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:02:44] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:02:54] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:02:54] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:02:55] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:02:56] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:02:56] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:02:56] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:02:56] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:03:06] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:03:06] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:03:08] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:03:09] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:03:09] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:03:09] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:03:09] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:03:19] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:03:19] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:03:20] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:03:21] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:03:21] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:03:21] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:03:21] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:03:31] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:03:31] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:03:33] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:03:34] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:03:34] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:03:34] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:03:34] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:03:44] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:03:44] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:03:46] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:03:47] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:03:47] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:03:47] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:03:47] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:03:57] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:03:57] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:03:59] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:03:59] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:03:59] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:03:59] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:03:59] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:04:09] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:04:09] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:04:11] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:04:12] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:04:12] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:04:12] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:04:12] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:04:22] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:04:22] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:04:24] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:04:25] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:04:25] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:04:25] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:04:25] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:04:35] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:04:35] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:04:37] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:04:37] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:04:37] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:04:37] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:04:37] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:04:47] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:04:47] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:04:49] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:04:50] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:04:50] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:04:50] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:04:50] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:05:00] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:05:00] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:05:01] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:05:02] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:05:02] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:05:02] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:05:02] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:05:12] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:05:12] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:05:14] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:05:15] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:05:15] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:05:15] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:05:15] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:05:25] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:05:25] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:05:27] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:05:28] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:05:28] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:05:28] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:05:28] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:05:38] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:05:38] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:05:40] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:05:40] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:05:40] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:05:40] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:05:40] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:05:50] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:05:50] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:05:52] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:05:53] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:05:53] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:05:53] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:05:53] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:06:03] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:06:03] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:06:05] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:06:06] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:06:06] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:06:06] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:06:06] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:06:16] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:06:16] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:06:18] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:06:18] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:06:18] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:06:18] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:06:18] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:06:28] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:06:28] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:06:30] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:06:31] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:06:31] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:06:31] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:06:31] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:06:41] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:06:41] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:06:43] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:06:44] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:06:44] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:06:44] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:06:44] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:06:54] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:06:54] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:06:56] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:06:57] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:06:57] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:06:57] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:06:57] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:07:07] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:07:07] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:07:08] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:07:09] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:07:09] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:07:09] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:07:09] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:07:19] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:07:19] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:07:20] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:07:21] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:07:21] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:07:21] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:07:21] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:07:31] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:07:31] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:07:33] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:07:34] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:07:34] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:07:34] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:07:34] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:07:44] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:07:44] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:07:45] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:07:46] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:07:46] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:07:46] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:07:46] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:07:56] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:07:56] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:07:58] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:07:58] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:07:58] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:07:58] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:07:58] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:08:08] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:08:08] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:08:10] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:08:11] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:08:11] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:08:11] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:08:11] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:08:21] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:08:21] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 16:08:23] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 16:08:23] [INFO] Emails NÃO LIDOS encontrados com 'OS' no assunto: 0
+[2025-07-17 16:08:23] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 16:08:23] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 16:08:23] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 16:08:33] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 16:08:33] [INFO] Iniciando busca por novos emails e PDFs...
