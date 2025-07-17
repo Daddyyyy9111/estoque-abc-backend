@@ -20,7 +20,8 @@ PROCESSED_LIST_FILE = 'processed_emails.json'
 
 # --- Configuração da API do Backend ---
 # URL base do seu backend no Render.com
-API_BACKEND_URL = 'https://estoque-abc-frontend.onrender.com' # Verifique se esta é a URL correta do seu backend
+# ATENÇÃO: SUBSTITUA ESTA URL PELA URL REAL DO SEU SERVIÇO DE BACKEND NO RENDER.COM
+API_BACKEND_URL = 'COLOQUE_AQUI_A_URL_DO_SEU_BACKEND_NO_RENDER' # <--- ATUALIZE ESTA URL!
 
 # --- Funções de Log ---
 def log(msg: str, level: str = "INFO"):
@@ -49,15 +50,32 @@ def connect_to_email():
 def fetch_new_emails(mail, processed_emails):
     """Busca novos e-mails com anexos PDF e retorna os caminhos dos PDFs baixados."""
     mail.select('inbox')
-    status, email_ids = mail.search(None, 'UNSEEN', 'HEADER Subject "Pedido CJA"') # Busca apenas e-mails não lidos com o assunto específico
+    
+    # --- LINHA DE BUSCA PARA DEPURAR ---
+    # Opção 1: Busca apenas e-mails não lidos com o assunto específico
+    # status, email_ids = mail.search(None, 'UNSEEN', 'SUBJECT', 'Pedido CJA') 
+    
+    # Opção 2 (PARA DEPURAR): Busca TODOS os e-mails com o assunto específico (lidos ou não)
+    # Use esta opção para verificar se o script consegue ver o e-mail, mesmo que lido.
+    status, email_ids = mail.search(None, 'SUBJECT', 'Pedido CJA') 
+    # --- FIM DA LINHA DE BUSCA PARA DEPURAR ---
+
+    if status != 'OK':
+        log(f"Erro ao buscar emails: {status}", "ERROR")
+        return []
+
     email_id_list = email_ids[0].split()
     
     new_pdfs = []
     
-    log(f"Emails não lidos encontrados: {len(email_id_list)}", "INFO")
+    log(f"Emails encontrados (incluindo lidos, para depuração): {len(email_id_list)}", "INFO")
 
     for email_id in email_id_list:
         status, msg_data = mail.fetch(email_id, '(RFC822)')
+        if status != 'OK':
+            log(f"Erro ao buscar dados do email ID {email_id.decode()}: {status}", "ERROR")
+            continue
+
         for response_part in msg_data:
             if isinstance(response_part, tuple):
                 msg = email.message_from_bytes(response_part[1])
@@ -66,6 +84,8 @@ def fetch_new_emails(mail, processed_emails):
                 subject, encoding = decode_header(msg['Subject'])[0]
                 if isinstance(subject, bytes):
                     subject = subject.decode(encoding if encoding else 'utf-8')
+
+                log(f"Verificando email ID {email_id.decode()} com assunto: '{subject}'", "INFO")
 
                 # Verifica se o e-mail já foi processado
                 if email_id.decode() in processed_emails:
