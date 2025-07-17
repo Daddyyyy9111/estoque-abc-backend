@@ -137,7 +137,7 @@ def extract_info_from_pdf(pdf_path):
             text += page.get_text()
         doc.close()
 
-        log(f"Texto extraído do PDF {pdf_path}:\n---INÍCIO DO TEXTO---\n{text}\n---FIM DO TEXTO---", "DEBUG")
+        log(f"Texto extraído do PDF {pdf_path}:\n---INÍCIO DO TEXTO---\n{text}\n---FIM DO TEXTO---", "INFO") # Mudei para INFO para ser mais visível
 
         # Regex para extrair OS
         os_match = re.search(r'OS:\s*(\d+)', text, re.IGNORECASE)
@@ -164,13 +164,14 @@ def extract_info_from_pdf(pdf_path):
         # Ajustado para o formato do PDF: "50 CONJUNTO ALUNO TAMANHO CJA-06 AZUL (TAMPO MDF)"
         # Captura: Quantidade, Modelo CJA, Tipo de Tampo
         # O tipo CJA (ZURICH/MASTICMOL) não está explicitamente na linha do item, então será 'N/A' por padrão.
+        # Corrigido: Usando aspas triplas para string de múltiplas linhas
         item_pattern = re.compile(
-            r'(\d+)\s+ # Quantidade no início da linha (grupo 1)
-            (?:CONJUNTO\s+ALUNO\s+TAMANHO\s+)? # Texto opcional "CONJUNTO ALUNO TAMANHO "
-            (CJA-\d{2})\s+ # Modelo CJA (grupo 2)
-            .*? # Qualquer coisa no meio (ex: AZUL)
-            \(TAMPO\s+(MDF|PLASTICO|MASTICMOL)\) # Tipo de Tampo dentro de (TAMPO ...) (grupo 3)
-            ', re.IGNORECASE | re.VERBOSE # re.VERBOSE permite comentários e ignora espaços em branco
+            r'(\d+)\s+' # Quantidade no início da linha (grupo 1)
+            r'(?:CONJUNTO\s+ALUNO\s+TAMANHO\s+)?' # Texto opcional "CONJUNTO ALUNO TAMANHO "
+            r'(CJA-\d{2})\s+' # Modelo CJA (grupo 2)
+            r'.*?' # Qualquer coisa no meio (ex: AZUL)
+            r'\(TAMPO\s+(MDF|PLASTICO|MASTICMOL)\)' # Tipo de Tampo dentro de (TAMPO ...) (grupo 3)
+            , re.IGNORECASE | re.VERBOSE
         )
         
         for line in text.split('\n'):
