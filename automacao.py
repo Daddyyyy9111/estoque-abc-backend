@@ -51,9 +51,9 @@ def fetch_new_emails(mail, processed_emails):
     """Busca novos e-mails com anexos PDF e retorna os caminhos dos PDFs baixados."""
     mail.select('inbox')
     
-    # Busca todos os e-mails dos últimos 7 dias (ou um período que você queira testar)
-    date_since = (datetime.now() - timedelta(days=7)).strftime("%d-%b-%Y")
-    status, email_ids = mail.search(None, 'SINCE', date_since)
+    # --- BUSCA SOMENTE E-MAILS NÃO LIDOS COM "OS" NO ASSUNTO ---
+    # Usamos 'SUBJECT', '"OS"' para uma busca IMAP mais geral e depois filtramos com regex no Python.
+    status, email_ids = mail.search(None, 'UNSEEN', 'SUBJECT', '"OS"') 
 
     if status != 'OK':
         log(f"Erro ao buscar emails: {status}", "ERROR")
@@ -64,7 +64,7 @@ def fetch_new_emails(mail, processed_emails):
 
     new_pdfs = []
     
-    log(f"Emails encontrados nos últimos 7 dias (para depuração): {len(email_id_list)}", "INFO")
+    log(f"Emails NÃO LIDOS encontrados com 'OS' no assunto: {len(email_id_list)}", "INFO")
 
     # Regex para verificar se o assunto contém "OS" seguido de um número
     os_subject_pattern = re.compile(r'os\s*\d+', re.IGNORECASE)
@@ -92,9 +92,10 @@ def fetch_new_emails(mail, processed_emails):
                 # Verifica se o assunto corresponde ao padrão 'OS [número]'
                 if not os_subject_pattern.search(normalized_subject):
                     log(f"Email ID {email_id.decode()} (Assunto: '{subject_decoded}') não corresponde ao padrão 'OS [número]'. Pulando.", "INFO")
+                    # Se não corresponde ao padrão, não deve ser marcado como lido ou processado
                     continue
 
-                # Verifica se o e-mail já foi processado
+                # Verifica se o e-mail já foi processado (redundância, mas garante que não há duplicação)
                 if email_id.decode() in processed_emails:
                     log(f"Email ID {email_id.decode()} (Assunto: {subject_decoded}) já foi processado. Pulando.", "INFO")
                     continue
@@ -121,6 +122,9 @@ def fetch_new_emails(mail, processed_emails):
 
                 if has_pdf_attachment:
                     processed_emails.add(email_id.decode()) # Adiciona o ID do e-mail à lista de processados
+                    # --- MARCA O E-MAIL COMO LIDO NO SERVIDOR IMAP ---
+                    mail.store(email_id, '+FLAGS', '\\Seen')
+                    log(f"Email ID {email_id.decode()} marcado como LIDO.", "INFO")
                 else:
                     log(f"Email ID {email_id.decode()} (Assunto: {subject_decoded}) não contém anexo PDF. Pulando.", "INFO")
 
@@ -137,7 +141,7 @@ def extract_info_from_pdf(pdf_path):
             text += page.get_text()
         doc.close()
 
-        log(f"Texto extraído do PDF {pdf_path}:\n---INÍCIO DO TEXTO---\n{text}\n---FIM DO TEXTO---", "INFO") # Mudei para INFO para ser mais visível
+        log(f"Texto extraído do PDF {pdf_path}:\n---INÍCIO DO TEXTO---\n{text}\n---FIM DO TEXTO---", "INFO") 
 
         # Regex para extrair OS
         os_match = re.search(r'OS:\s*(\d+)', text, re.IGNORECASE)
@@ -155,8 +159,7 @@ def extract_info_from_pdf(pdf_path):
         log(f"DEBUG: Prazo de Entrega extraído: {prazo_entrega}", "DEBUG")
 
         # Regex para extrair Cidade de Destino (mais flexível)
-        # Tenta "CIDADE DE DESTINO:" ou apenas "CIDADE:"
-        cidade_destino_match = re.search(r'(?:CIDADE DE DESTINO|CIDADE):\s*([A-Za-z\s\/]+)', text, re.IGNORECASE)
+        cidade_destino_match = re.search(r'(?:CLIENTE|CIDADE DE DESTINO|CIDADE):\s*([A-Za-z\s\/]+)', text, re.IGNORECASE)
         cidade_destino = cidade_destino_match.group(1).strip() if cidade_destino_match else "N/A"
         log(f"DEBUG: Cidade de Destino extraída: {cidade_destino}", "DEBUG")
 
@@ -164,7 +167,6 @@ def extract_info_from_pdf(pdf_path):
         # Ajustado para o formato do PDF: "50 CONJUNTO ALUNO TAMANHO CJA-06 AZUL (TAMPO MDF)"
         # Captura: Quantidade, Modelo CJA, Tipo de Tampo
         # O tipo CJA (ZURICH/MASTICMOL) não está explicitamente na linha do item, então será 'N/A' por padrão.
-        # Corrigido: Usando aspas triplas para string de múltiplas linhas
         item_pattern = re.compile(
             r'(\d+)\s+' # Quantidade no início da linha (grupo 1)
             r'(?:CONJUNTO\s+ALUNO\s+TAMANHO\s+)?' # Texto opcional "CONJUNTO ALUNO TAMANHO "
@@ -318,7 +320,7 @@ def main():
         mail = connect_to_email()
         if mail:
             new_pdfs = fetch_new_emails(mail, processed_emails)
-            save_processed_emails(processed_emails) # CORRIGIDO: Usando processed_emails
+            save_processed_emails(processed_emails) 
             log(f"Novos PDFs baixados neste ciclo: {len(new_pdfs)}", "INFO")
             
             if new_pdfs:

@@ -1030,3 +1030,58 @@ CONJUNTO ALUNO TAMANHO CJA-06 AZUL (TAMPO MDF)
 [2025-07-17 15:03:01] [INFO] Total de novos ITENS DE PEDIDO CJA extraídos dos PDFs baixados neste ciclo: 0
 [2025-07-17 15:03:01] [INFO] Nenhum dado para enviar para o backend.
 [2025-07-17 15:03:01] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 15:22:04] [INFO] === Iniciando o automatizador de Pedidos ABC Móveis ===
+[2025-07-17 15:22:04] [INFO] Carregados 9 itens de pedido da lista de processados.
+[2025-07-17 15:22:04] [INFO] Token de autenticação Firebase obtido com sucesso.
+[2025-07-17 15:22:04] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 15:22:04] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 15:22:06] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 15:22:06] [INFO] Emails encontrados nos últimos 7 dias (para depuração): 9
+[2025-07-17 15:22:08] [INFO] Verificando email ID 249 - Assunto: 'OS 5614 - MUNICIPIO DE IRATI/SC' (Normalizado: 'os 5614 - municipio de irati/sc')
+[2025-07-17 15:22:08] [INFO] Email ID 249 (Assunto: OS 5614 - MUNICIPIO DE IRATI/SC) já foi processado. Pulando.
+[2025-07-17 15:22:09] [INFO] Verificando email ID 248 - Assunto: 'OS 5613 - MUNICIPIO DE CANOINHAS/SC' (Normalizado: 'os 5613 - municipio de canoinhas/sc')
+[2025-07-17 15:22:09] [INFO] Email ID 248 (Assunto: OS 5613 - MUNICIPIO DE CANOINHAS/SC) já foi processado. Pulando.
+[2025-07-17 15:22:09] [INFO] Verificando email ID 247 - Assunto: 'Re: OS 5609 - COOPERATIVA DOS PROFISSIONAIS DE ENSINO DE PIRANGUINHO' (Normalizado: 're: os 5609 - cooperativa dos profissionais de ensino de piranguinho')
+[2025-07-17 15:22:09] [INFO] Email ID 247 (Assunto: Re: OS 5609 - COOPERATIVA DOS PROFISSIONAIS DE ENSINO DE PIRANGUINHO) já foi processado. Pulando.
+[2025-07-17 15:22:10] [INFO] Verificando email ID 246 - Assunto: 'OS 5612 - MUNICIPIO DE CORDILHEIRA ALTA/SC' (Normalizado: 'os 5612 - municipio de cordilheira alta/sc')
+[2025-07-17 15:22:10] [INFO] Email ID 246 (Assunto: OS 5612 - MUNICIPIO DE CORDILHEIRA ALTA/SC) já foi processado. Pulando.
+[2025-07-17 15:22:10] [INFO] Verificando email ID 245 - Assunto: 'OS 5609 - COOPERATIVA DOS PROFISSIONAIS DE ENSINO DE PIRANGUINHO' (Normalizado: 'os 5609 - cooperativa dos profissionais de ensino de piranguinho')
+[2025-07-17 15:22:10] [INFO] Email ID 245 (Assunto: OS 5609 - COOPERATIVA DOS PROFISSIONAIS DE ENSINO DE PIRANGUINHO) já foi processado. Pulando.
+[2025-07-17 15:22:11] [INFO] Verificando email ID 244 - Assunto: 'OS 5611 - MUNICIPIO DE CUNHATAÍ/SC' (Normalizado: 'os 5611 - municipio de cunhataí/sc')
+[2025-07-17 15:22:11] [INFO] Email ID 244 (Assunto: OS 5611 - MUNICIPIO DE CUNHATAÍ/SC) já foi processado. Pulando.
+[2025-07-17 15:22:12] [INFO] Verificando email ID 243 - Assunto: 'OS 5605 - MUNICIPIO DE LAGUNA/SC' (Normalizado: 'os 5605 - municipio de laguna/sc')
+[2025-07-17 15:22:12] [INFO] Email ID 243 (Assunto: OS 5605 - MUNICIPIO DE LAGUNA/SC) já foi processado. Pulando.
+[2025-07-17 15:22:12] [INFO] Verificando email ID 242 - Assunto: 'CARREGAMENTO BRUNO - 18/07/2025' (Normalizado: 'carregamento bruno - 18/07/2025')
+[2025-07-17 15:22:12] [INFO] Email ID 242 (Assunto: 'CARREGAMENTO BRUNO - 18/07/2025') não corresponde ao padrão 'OS [número]'. Pulando.
+[2025-07-17 15:22:13] [INFO] Verificando email ID 241 - Assunto: 'NOTAS FISCAIS - BRUNO - 11/07/2025' (Normalizado: 'notas fiscais - bruno - 11/07/2025')
+[2025-07-17 15:22:13] [INFO] Email ID 241 (Assunto: 'NOTAS FISCAIS - BRUNO - 11/07/2025') não corresponde ao padrão 'OS [número]'. Pulando.
+[2025-07-17 15:22:13] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 15:22:13] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 15:22:13] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
+[2025-07-17 15:22:23] [INFO] 
+==== Início do Ciclo de Verificação de Pedidos ====
+[2025-07-17 15:22:23] [INFO] Iniciando busca por novos emails e PDFs...
+[2025-07-17 15:22:24] [INFO] Login IMAP bem-sucedido.
+[2025-07-17 15:22:25] [INFO] Emails encontrados nos últimos 7 dias (para depuração): 9
+[2025-07-17 15:22:26] [INFO] Verificando email ID 249 - Assunto: 'OS 5614 - MUNICIPIO DE IRATI/SC' (Normalizado: 'os 5614 - municipio de irati/sc')
+[2025-07-17 15:22:26] [INFO] Email ID 249 (Assunto: OS 5614 - MUNICIPIO DE IRATI/SC) já foi processado. Pulando.
+[2025-07-17 15:22:27] [INFO] Verificando email ID 248 - Assunto: 'OS 5613 - MUNICIPIO DE CANOINHAS/SC' (Normalizado: 'os 5613 - municipio de canoinhas/sc')
+[2025-07-17 15:22:27] [INFO] Email ID 248 (Assunto: OS 5613 - MUNICIPIO DE CANOINHAS/SC) já foi processado. Pulando.
+[2025-07-17 15:22:27] [INFO] Verificando email ID 247 - Assunto: 'Re: OS 5609 - COOPERATIVA DOS PROFISSIONAIS DE ENSINO DE PIRANGUINHO' (Normalizado: 're: os 5609 - cooperativa dos profissionais de ensino de piranguinho')
+[2025-07-17 15:22:27] [INFO] Email ID 247 (Assunto: Re: OS 5609 - COOPERATIVA DOS PROFISSIONAIS DE ENSINO DE PIRANGUINHO) já foi processado. Pulando.
+[2025-07-17 15:22:28] [INFO] Verificando email ID 246 - Assunto: 'OS 5612 - MUNICIPIO DE CORDILHEIRA ALTA/SC' (Normalizado: 'os 5612 - municipio de cordilheira alta/sc')
+[2025-07-17 15:22:28] [INFO] Email ID 246 (Assunto: OS 5612 - MUNICIPIO DE CORDILHEIRA ALTA/SC) já foi processado. Pulando.
+[2025-07-17 15:22:29] [INFO] Verificando email ID 245 - Assunto: 'OS 5609 - COOPERATIVA DOS PROFISSIONAIS DE ENSINO DE PIRANGUINHO' (Normalizado: 'os 5609 - cooperativa dos profissionais de ensino de piranguinho')
+[2025-07-17 15:22:29] [INFO] Email ID 245 (Assunto: OS 5609 - COOPERATIVA DOS PROFISSIONAIS DE ENSINO DE PIRANGUINHO) já foi processado. Pulando.
+[2025-07-17 15:22:29] [INFO] Verificando email ID 244 - Assunto: 'OS 5611 - MUNICIPIO DE CUNHATAÍ/SC' (Normalizado: 'os 5611 - municipio de cunhataí/sc')
+[2025-07-17 15:22:29] [INFO] Email ID 244 (Assunto: OS 5611 - MUNICIPIO DE CUNHATAÍ/SC) já foi processado. Pulando.
+[2025-07-17 15:22:30] [INFO] Verificando email ID 243 - Assunto: 'OS 5605 - MUNICIPIO DE LAGUNA/SC' (Normalizado: 'os 5605 - municipio de laguna/sc')
+[2025-07-17 15:22:30] [INFO] Email ID 243 (Assunto: OS 5605 - MUNICIPIO DE LAGUNA/SC) já foi processado. Pulando.
+[2025-07-17 15:22:30] [INFO] Verificando email ID 242 - Assunto: 'CARREGAMENTO BRUNO - 18/07/2025' (Normalizado: 'carregamento bruno - 18/07/2025')
+[2025-07-17 15:22:30] [INFO] Email ID 242 (Assunto: 'CARREGAMENTO BRUNO - 18/07/2025') não corresponde ao padrão 'OS [número]'. Pulando.
+[2025-07-17 15:22:31] [INFO] Verificando email ID 241 - Assunto: 'NOTAS FISCAIS - BRUNO - 11/07/2025' (Normalizado: 'notas fiscais - bruno - 11/07/2025')
+[2025-07-17 15:22:31] [INFO] Email ID 241 (Assunto: 'NOTAS FISCAIS - BRUNO - 11/07/2025') não corresponde ao padrão 'OS [número]'. Pulando.
+[2025-07-17 15:22:31] [INFO] Novos PDFs baixados neste ciclo: 0
+[2025-07-17 15:22:31] [INFO] Nenhum novo PDF para processar neste ciclo.
+[2025-07-17 15:22:31] [INFO] ==== Ciclo de Verificação Concluído. Aguardando próximo ciclo... ====
