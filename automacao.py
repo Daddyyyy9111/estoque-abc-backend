@@ -66,9 +66,7 @@ def fetch_new_emails(mail, processed_emails):
     
     log(f"Emails encontrados nos últimos 7 dias (para depuração): {len(email_id_list)}", "INFO")
 
-    # Regex para verificar se o assunto começa com "OS" seguido de um número
-    # ou contém "OS" seguido de um número em qualquer parte do assunto.
-    # Ex: "OS 1234 - Cliente", "Re: OS 5678", "Pedido com OS999"
+    # Regex para verificar se o assunto contém "OS" seguido de um número
     os_subject_pattern = re.compile(r'os\s*\d+', re.IGNORECASE)
 
     for email_id in email_id_list:
@@ -91,11 +89,10 @@ def fetch_new_emails(mail, processed_emails):
 
                 log(f"Verificando email ID {email_id.decode()} - Assunto: '{subject_decoded}' (Normalizado: '{normalized_subject}')", "INFO")
 
-                # --- NOVA LÓGICA DE VERIFICAÇÃO DE ASSUNTO ---
+                # Verifica se o assunto corresponde ao padrão 'OS [número]'
                 if not os_subject_pattern.search(normalized_subject):
                     log(f"Email ID {email_id.decode()} (Assunto: '{subject_decoded}') não corresponde ao padrão 'OS [número]'. Pulando.", "INFO")
                     continue
-                # --- FIM DA NOVA LÓGICA ---
 
                 # Verifica se o e-mail já foi processado
                 if email_id.decode() in processed_emails:
@@ -140,40 +137,61 @@ def extract_info_from_pdf(pdf_path):
             text += page.get_text()
         doc.close()
 
-        # Regex para extrair OS e data de emissão
-        os_match = re.search(r'OS:\s*(\d+)', text, re.IGNORECASE)
-        data_emissao_match = re.search(r'Data de Emissão:\s*(\d{2}/\d{2}/\d{4})', text, re.IGNORECASE)
-        prazo_entrega_match = re.search(r'Prazo de Entrega:\s*(\d{2}/\d{2}/\d{4})', text, re.IGNORECASE)
-        cidade_destino_match = re.search(r'Cidade de Destino:\s*([A-Za-z\s]+)', text, re.IGNORECASE)
+        log(f"Texto extraído do PDF {pdf_path}:\n---INÍCIO DO TEXTO---\n{text}\n---FIM DO TEXTO---", "DEBUG")
 
+        # Regex para extrair OS
+        os_match = re.search(r'OS:\s*(\d+)', text, re.IGNORECASE)
         os_number = os_match.group(1) if os_match else "N/A"
+        log(f"DEBUG: OS extraída: {os_number}", "DEBUG")
+
+        # Regex para extrair Data de Emissão
+        data_emissao_match = re.search(r'DATA DE EMISSÃO:\s*(\d{2}/\d{2}/\d{4})', text, re.IGNORECASE)
         data_emissao = data_emissao_match.group(1) if data_emissao_match else "N/A"
+        log(f"DEBUG: Data de Emissão extraída: {data_emissao}", "DEBUG")
+
+        # Regex para extrair Prazo de Entrega
+        prazo_entrega_match = re.search(r'PRAZO DE ENTREGA:\s*(\d{2}/\d{2}/\d{4})', text, re.IGNORECASE)
         prazo_entrega = prazo_entrega_match.group(1) if prazo_entrega_match else "N/A"
+        log(f"DEBUG: Prazo de Entrega extraído: {prazo_entrega}", "DEBUG")
+
+        # Regex para extrair Cidade de Destino (mais flexível)
+        # Tenta "CIDADE DE DESTINO:" ou apenas "CIDADE:"
+        cidade_destino_match = re.search(r'(?:CIDADE DE DESTINO|CIDADE):\s*([A-Za-z\s\/]+)', text, re.IGNORECASE)
         cidade_destino = cidade_destino_match.group(1).strip() if cidade_destino_match else "N/A"
+        log(f"DEBUG: Cidade de Destino extraída: {cidade_destino}", "DEBUG")
 
         # Regex para extrair itens de pedido (Modelo CJA, Tipo de Tampo, Quantidade)
-        # Ex: "CJA-06  MDF  10" ou "CJA-05  PLASTICO  5"
-        # Adicionado para capturar o tipo CJA (ZURICH ou MASTICMOL) se presente
-        # Padrão mais robusto para capturar tipo CJA, modelo CJA, tipo de tampo e quantidade
-        item_pattern = re.compile(r'(ZURICH|MASTICMOL)?\s*(CJA-\d{2})\s+(MDF|PLASTICO|MASTICMOL)\s+(\d+)', re.IGNORECASE)
+        # Ajustado para o formato do PDF: "50 CONJUNTO ALUNO TAMANHO CJA-06 AZUL (TAMPO MDF)"
+        # Captura: Quantidade, Modelo CJA, Tipo de Tampo
+        # O tipo CJA (ZURICH/MASTICMOL) não está explicitamente na linha do item, então será 'N/A' por padrão.
+        item_pattern = re.compile(
+            r'(\d+)\s+ # Quantidade no início da linha (grupo 1)
+            (?:CONJUNTO\s+ALUNO\s+TAMANHO\s+)? # Texto opcional "CONJUNTO ALUNO TAMANHO "
+            (CJA-\d{2})\s+ # Modelo CJA (grupo 2)
+            .*? # Qualquer coisa no meio (ex: AZUL)
+            \(TAMPO\s+(MDF|PLASTICO|MASTICMOL)\) # Tipo de Tampo dentro de (TAMPO ...) (grupo 3)
+            ', re.IGNORECASE | re.VERBOSE # re.VERBOSE permite comentários e ignora espaços em branco
+        )
         
         for line in text.split('\n'):
             item_match = item_pattern.search(line)
             if item_match:
-                tipo_cja = item_match.group(1).upper() if item_match.group(1) else "N/A" # Captura o tipo CJA
+                quantidade = int(item_match.group(1))
                 modelo_cja = item_match.group(2).upper()
                 tampo_tipo = item_match.group(3).upper()
-                quantidade = int(item_match.group(4))
+                tipo_cja = "N/A" # Definido como N/A pois não está no padrão da linha do item neste PDF
+
                 extracted_items.append({
                     "tipo_cja": tipo_cja,
                     "modelo_cja": modelo_cja,
                     "tampo_tipo": tampo_tipo,
                     "quantidade": quantidade,
-                    "os_number": os_number,
-                    "cidade_destino": cidade_destino,
+                    "os_number": os_number, # Repete a OS para cada item
+                    "cidade_destino": cidade_destino, # Repete a cidade para cada item
                     "data_emissao": data_emissao,
                     "prazo_entrega": prazo_entrega
                 })
+                log(f"DEBUG: Item extraído: Quantidade={quantidade}, Modelo CJA={modelo_cja}, Tampo={tampo_tipo}", "DEBUG")
         log(f"Informações extraídas do PDF {pdf_path}: OS={os_number}, Cidade={cidade_destino}, Itens={len(extracted_items)}", "INFO")
     except Exception as e:
         log(f"Erro ao extrair informações do PDF {pdf_path}: {e}", "ERROR")
